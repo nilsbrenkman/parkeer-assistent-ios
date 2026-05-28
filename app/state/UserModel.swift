@@ -36,18 +36,22 @@ class UserModel: ObservableObject {
     @Published var parkingMeters: [ParkingMeter] = []
     @Published var lastLocation: CLLocationCoordinate2D? = nil
     
-    let loginClient: LoginClient
-    let userClient: UserClient
+    let loginClient:   LoginClient
+    let userClient:    UserClient
     let parkingClient: ParkingClient
     let visitorClient: VisitorClient
     let paymentClient: PaymentClient
     
-    init() throws {
-        loginClient   = try ClientManager.instance.get(LoginClient.self)
-        userClient    = try ClientManager.instance.get(UserClient.self)
-        parkingClient = try ClientManager.instance.get(ParkingClient.self)
-        visitorClient = try ClientManager.instance.get(VisitorClient.self)
-        paymentClient = try ClientManager.instance.get(PaymentClient.self)
+    init() {
+        do {
+            loginClient   = try ClientManager.instance.get(LoginClient.self)
+            userClient    = try ClientManager.instance.get(UserClient.self)
+            parkingClient = try ClientManager.instance.get(ParkingClient.self)
+            visitorClient = try ClientManager.instance.get(VisitorClient.self)
+            paymentClient = try ClientManager.instance.get(PaymentClient.self)
+        } catch {
+            fatalError("Failed to initialize UserModel: \(error)")
+        }
     }
     
     func getUser() async {

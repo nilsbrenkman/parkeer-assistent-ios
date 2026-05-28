@@ -97,12 +97,8 @@ class Notifications {
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = subtitle
-        #if os(iOS)
-            content.sound = UNNotificationSound(named: UNNotificationSoundName(Constants.sound.carHorn))
-        #endif
-        if #available(iOS 15.0, *) {
-            content.interruptionLevel = .timeSensitive
-        }
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(Constants.sound.carHorn))
+        content.interruptionLevel = .timeSensitive
 
         let timeInterval = Date.now().distance(to: date)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)

@@ -23,11 +23,11 @@ import SwiftUI
 
         @MainActor func setupPreview(loggedIn: Bool = false) -> some View {
             _ = PreviewSetup.registerClients
-            let login = try! AppModel()
-            login.isLoggedIn = loggedIn
-            let user = try! UserModel()
+            let app = AppModel()
+            app.isLoggedIn = loggedIn
+            let user = UserModel()
             let messenger = AppMessenger()
-            return environmentObject(login)
+            return environmentObject(app)
                 .environmentObject(user)
                 .environmentObject(messenger)
         }

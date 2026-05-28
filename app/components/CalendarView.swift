@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct CalendarView: UIViewRepresentable {
 
     @Binding var date: Date
@@ -33,10 +32,6 @@ struct CalendarView: UIViewRepresentable {
 }
 
 #Preview {
-    if #available(iOS 16.0, *) {
-//        CalendarView()
-        EmptyView()
-    } else {
-        EmptyView()
-    }
+    @Previewable @State var date = Date()
+    CalendarView(date: $date, delegate: CalenderViewDelegate())
 }

@@ -12,31 +12,17 @@ struct parkeerassistentApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    @StateObject var app: AppModel = {
-        do {
-            return try AppModel()
-        } catch {
-            fatalError("Failed to initialize AppModel: \(error)")
-        }
-    }()
-    @StateObject var user: UserModel = {
-        do {
-            return try UserModel()
-        } catch {
-            fatalError("Failed to initialize UserModel: \(error)")
-        }
-    }()
+    @StateObject var app = AppModel()
+    @StateObject var user = UserModel()
     @StateObject var messenger = AppMessenger()
 
-    static let versionKey = "version"
-
     init() {
-        ClientManager.instance.register(LoginClient.self, client: LoginClientApi.client)
-        ClientManager.instance.register(UserClient.self, client: UserClientApi.client)
+        ClientManager.instance.register(LoginClient.self,   client: LoginClientApi.client)
+        ClientManager.instance.register(UserClient.self,    client: UserClientApi.client)
         ClientManager.instance.register(ParkingClient.self, client: ParkingClientApi.client)
         ClientManager.instance.register(VisitorClient.self, client: VisitorClientApi.client)
         ClientManager.instance.register(PaymentClient.self, client: PaymentClientApi.client)
-        ClientManager.instance.register(GeoClient.self, client: GeoClientApi.client)
+        ClientManager.instance.register(GeoClient.self,     client: GeoClientApi.client)
 
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .font: UIFont.systemFont(ofSize: 24, weight: .bold)

@@ -49,9 +49,13 @@ class AppModel: ObservableObject, ErrorHandler {
     
     weak var user: UserModel?
     
-    init() throws {
-        loginClient = try ClientManager.instance.get(LoginClient.self)
-        ApiClient.client.registerErrorHandler(self)
+    init() {
+        do {
+            loginClient = try ClientManager.instance.get(LoginClient.self)
+            ApiClient.client.registerErrorHandler(self)
+        } catch {
+            fatalError("Failed to initialize UserModel: \(error)")
+        }
     }
     
     nonisolated func handleError(_ error: ClientError) {

@@ -15,22 +15,11 @@ struct DatePickerModal: View {
     var body: some View {
         VStack {
             VStack {
-                if #available(iOS 16.0, *) {
-                    HStack {
-                        CalendarView(date: $date, delegate: delegate)
-                            .scaledToFit()
-                    }
-                    .padding(.all, Constants.padding.normal)
-                } else {
-                    DatePicker(
-                        "",
-                        selection: $date,
-                        in: Date.now()...,
-                        displayedComponents: [.date]
-                    )
-                    .datePickerStyle(GraphicalDatePickerStyle())
-                    .padding()
+                HStack {
+                    CalendarView(date: $date, delegate: delegate)
+                        .scaledToFit()
                 }
+                .padding(.all, Constants.padding.normal)
             }
             .background(.background)
             .cornerRadius(Constants.radius.normal)
