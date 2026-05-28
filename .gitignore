@@ -1,2 +1,14 @@
 .idea/
 .DS_Store
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Build outputs
+build/
+DerivedData/
