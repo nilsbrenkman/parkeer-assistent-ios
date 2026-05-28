@@ -10,8 +10,8 @@ import SwiftUI
 @MainActor
 struct PaymentView: View {
 
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var payment: PaymentStore
 
     @Environment(\.openURL) private var openURL
 
@@ -115,7 +115,7 @@ struct PaymentView: View {
                 Button(action: {
                     Task {
                         wait = true
-                        await user.payment(amount: selectedAmount, brand: selectedMethod) { url in
+                        await payment.payment(amount: selectedAmount, brand: selectedMethod) { url in
                             if let url = URL(string: url) {
                                 openURL(url)
                             }
@@ -133,7 +133,7 @@ struct PaymentView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .pageTitle(Lang.Payment.amount.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Payment.amount.localized(), dismiss: router.popScreen)
     }
 
 }

@@ -12,8 +12,8 @@ struct HistoryListView: View {
 
     static let groupFormatter = Util.createDateFormatter("MMMM yyyy")
 
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var router: Router
 
     @State var history: [History]? = nil
 
@@ -68,7 +68,7 @@ struct HistoryListView: View {
                 }
             }
         }
-        .pageTitle(Lang.Parking.history.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Parking.history.localized(), dismiss: router.popScreen)
     }
 
     private func groupHistory(_ history: [History]) -> [HistoryGroup] {

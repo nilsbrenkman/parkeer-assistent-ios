@@ -10,8 +10,10 @@ import SwiftUI
 @MainActor
 struct ParkingDetailView: View {
 
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var visitors: VisitorStore
+    @EnvironmentObject var parkings: ParkingStore
 
     var parking: Parking
 
@@ -23,7 +25,7 @@ struct ParkingDetailView: View {
                     LicenseView(license: parking.license)
                         .centered()
 
-                    Property(label: Lang.Visitor.name.localized(), text: user.getName(from: parking.license))
+                    Property(label: Lang.Visitor.name.localized(), text: visitors.getName(from: parking.license))
                     Property(label: Lang.Parking.cost.localized(), text: "€ \(Util.formatCost(parking.cost))")
                     Property(label: Lang.Parking.startTime.localized(), text: Util.getParkingTime(parking.startTime))
                     Property(label: Lang.Parking.endTime.localized(), text: Util.getParkingTime(parking.endTime))
@@ -34,9 +36,9 @@ struct ParkingDetailView: View {
             Section {
                 Button(action: {
                     Task {
-                        await user.stopParking(parking)
+                        await parkings.stopParking(parking, user: user)
                     }
-                    app.popScreen()
+                    router.popScreen()
                 }) {
                     Text(Lang.Parking.stop.localized())
                         .font(.title3)
@@ -46,7 +48,7 @@ struct ParkingDetailView: View {
                 .style(.danger)
             }
         }
-        .pageTitle(Lang.Parking.header.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Parking.header.localized(), dismiss: router.popScreen)
     }
 }
 

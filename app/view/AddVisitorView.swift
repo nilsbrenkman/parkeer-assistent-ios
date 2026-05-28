@@ -10,8 +10,8 @@ import SwiftUI
 @MainActor
 struct AddVisitorView: View {
     
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var visitors: VisitorStore
     
     @State private var license: String = ""
     @State private var name: String = ""
@@ -69,8 +69,8 @@ struct AddVisitorView: View {
                     if !wait {
                         Task {
                             wait = true
-                            await user.addVisitor(license: license, name: name) {
-                                app.popScreen()
+                            await visitors.addVisitor(license: license, name: name) {
+                                router.popScreen()
                             }
                             wait = false
                         }
@@ -86,7 +86,7 @@ struct AddVisitorView: View {
             
         }
         .listStyle(.insetGrouped)
-        .pageTitle(Lang.Visitor.add.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Visitor.add.localized(), dismiss: router.popScreen)
     }
     
 }

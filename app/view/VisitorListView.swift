@@ -10,22 +10,22 @@ import SwiftUI
 
 struct VisitorListView: View {
 
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var visitors: VisitorStore
 
     var body: some View {
 
         Section(header: SectionHeader(Lang.Visitor.header.localized())) {
 
-            if let visitors = $user.visitors.wrappedValue {
+            if let list = visitors.visitors {
 
-                if visitors.isEmpty {
+                if list.isEmpty {
                     Text(Lang.Visitor.noVisitors.localized())
                         .centered()
                 } else {
-                    ForEach(visitors, id: \.self) { visitor in
+                    ForEach(list, id: \.self) { visitor in
                         Button(action: {
-                            app.pushScreen(.addParking(visitor))
+                            router.pushScreen(.addParking(visitor))
                         }) {
                             HStack {
                                 VisitorView(visitor: visitor)
@@ -52,13 +52,11 @@ struct VisitorListView: View {
 
         Section {
             Button(action: {
-                if let visitors = $user.visitors.wrappedValue {
-                    if visitors.count >= 9 {
-                        MessageManager.instance.addMessage(Lang.Visitor.tooManyMsg.localized(), type: Type.WARN)
-                        return
-                    }
+                if let list = visitors.visitors, list.count >= 9 {
+                    MessageStore.shared.addMessage(Lang.Visitor.tooManyMsg.localized(), type: Type.WARN)
+                    return
                 }
-                app.pushScreen(.addVisitor)
+                router.pushScreen(.addVisitor)
             }) {
                 Text(Lang.Visitor.add.localized())
                     .font(.title3)
@@ -70,10 +68,10 @@ struct VisitorListView: View {
     }
 
     func delete(_ visitor: Visitor) {
-        guard let index = user.visitors?.firstIndex(of: visitor) else { return }
-        user.visitors!.remove(at: index)
+        guard let index = visitors.visitors?.firstIndex(of: visitor) else { return }
+        visitors.visitors!.remove(at: index)
         Task {
-            await user.deleteVisitor(visitor)
+            await visitors.deleteVisitor(visitor)
         }
     }
 

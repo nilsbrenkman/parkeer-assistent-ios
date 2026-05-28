@@ -10,8 +10,8 @@ import SwiftUI
 @MainActor
 struct SettingsView: View {
 
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var router: Router
 
     @State private var onStart = true
     @State private var onStop = true
@@ -70,7 +70,7 @@ struct SettingsView: View {
             reminderInterval = UserDefaults.standard.double(forKey: Notifications.INTERVAL_KEY)
             autoLogin = Keychain.autoLogin()
         }
-        .pageTitle(Lang.Settings.header.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Settings.header.localized(), dismiss: router.popScreen)
     }
 }
 

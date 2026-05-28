@@ -23,13 +23,25 @@ import SwiftUI
 
         @MainActor func setupPreview(loggedIn: Bool = false) -> some View {
             _ = PreviewSetup.registerClients
-            let app = AppModel()
-            app.isLoggedIn = loggedIn
-            let user = UserModel()
-            let messenger = AppMessenger()
-            return environmentObject(app)
+            let session = SessionStore()
+            session.isLoggedIn = loggedIn
+            let accounts = AccountStore()
+            let user = UserStore()
+            let visitors = VisitorStore()
+            let parkings = ParkingStore()
+            let parkingMeter = ParkingMeterStore()
+            let payment = PaymentStore()
+            let router = Router()
+            let messages = MessageStore.shared
+            return environmentObject(session)
+                .environmentObject(accounts)
                 .environmentObject(user)
-                .environmentObject(messenger)
+                .environmentObject(visitors)
+                .environmentObject(parkings)
+                .environmentObject(parkingMeter)
+                .environmentObject(payment)
+                .environmentObject(router)
+                .environmentObject(messages)
         }
 
     }

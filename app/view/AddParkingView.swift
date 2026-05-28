@@ -9,8 +9,9 @@ import SwiftUI
 
 struct AddParkingView: View {
     
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var parkings: ParkingStore
+    @EnvironmentObject var router: Router
     
     let visitor: Visitor
     
@@ -110,8 +111,8 @@ struct AddParkingView: View {
                     if !wait && minutes > 0 {
                         Task {
                             wait = true
-                            await user.startParking(visitor, timeMinutes: minutes, start: startDate) {
-                                app.popScreen()
+                            await parkings.startParking(visitor, timeMinutes: minutes, start: startDate, user: user) {
+                                router.popScreen()
                             }
                             wait = false
                         }
@@ -136,7 +137,7 @@ struct AddParkingView: View {
                 update()
             }
         })
-        .pageTitle(Lang.Parking.start.localized(), dismiss: app.popScreen)
+        .pageTitle(Lang.Parking.start.localized(), dismiss: router.popScreen)
         .fullScreenCover(isPresented: $showMap) {
             ParkingMeterView { meter in
                 user.setParkingMeter(meter.id)

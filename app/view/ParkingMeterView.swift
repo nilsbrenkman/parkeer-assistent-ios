@@ -10,7 +10,7 @@ import MapKit
 
 struct ParkingMeterView: View {
     
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var parkingMeter: ParkingMeterStore
     
     var onSelect: (ParkingMeter) -> Void
     
@@ -21,10 +21,10 @@ struct ParkingMeterView: View {
     private let geoClient = try? ClientManager.instance.get(GeoClient.self)
     
     var body: some View {
-        Map(position: $user.position, bounds: .amsterdam, interactionModes: [.pan, .zoom, .rotate]) {
+        Map(position: $parkingMeter.position, bounds: .amsterdam, interactionModes: [.pan, .zoom, .rotate]) {
             UserAnnotation()
             
-            ForEach(user.parkingMeters, id: \.id) { meter in
+            ForEach(parkingMeter.parkingMeters, id: \.id) { meter in
                 Annotation("", coordinate: meter.coordinate(), anchor: .center) {
                     Text("\(String(meter.id))")
                         .font(.title2)
@@ -45,15 +45,15 @@ struct ParkingMeterView: View {
         .onMapCameraChange { context in
             if isAppearing { return }
             let center = context.region.center
-            if let last = user.lastLocation {
+            if let last = parkingMeter.lastLocation {
                 let distance = center.distance(to: last)
                 if distance < 50 {
                     return
                 }
             }
-            user.lastLocation = center
+            parkingMeter.lastLocation = center
             Task {
-                user.parkingMeters = try await self.geoClient?.parkingMeters(location: center) ?? []
+                parkingMeter.parkingMeters = try await self.geoClient?.parkingMeters(location: center) ?? []
             }
         }
         .mapControls {
@@ -67,7 +67,7 @@ struct ParkingMeterView: View {
                 self.locationAuthorizationListener = LocationAuthorizationListener(self.updateLocation)
                 self.locationManager.delegate = self.locationAuthorizationListener
             }
-            if (user.lastLocation == nil) {
+            if (parkingMeter.lastLocation == nil) {
                 if (self.locationManager.authorizationStatus == .authorizedWhenInUse) {
                     self.locationManager.requestLocation()
                 } else {
@@ -79,7 +79,7 @@ struct ParkingMeterView: View {
     }
     
     func updateLocation(coordinate: CLLocationCoordinate2D) {
-        user.position = .camera(MapCamera(
+        parkingMeter.position = .camera(MapCamera(
             centerCoordinate: coordinate,
             distance: 1000,
             heading: 0,
@@ -111,7 +111,7 @@ struct ParkingMeterView: View {
         
         func locationManager(_ manager: CLLocationManager,
                              didFailWithError error: any Error) {
-            MessageManager.instance.addMessage(error.localizedDescription, type: Type.ERROR)
+            Log.error("locationManager didFailWithError: \(error.localizedDescription)")
         }
         
     }

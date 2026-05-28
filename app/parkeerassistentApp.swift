@@ -12,9 +12,15 @@ struct parkeerassistentApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    @StateObject var app = AppModel()
-    @StateObject var user = UserModel()
-    @StateObject var messenger = AppMessenger()
+    @StateObject var session = SessionStore()
+    @StateObject var accounts = AccountStore()
+    @StateObject var user = UserStore()
+    @StateObject var visitors = VisitorStore()
+    @StateObject var parkings = ParkingStore()
+    @StateObject var parkingMeter = ParkingMeterStore()
+    @StateObject var payment = PaymentStore()
+    @StateObject var router = Router()
+    @StateObject var messages = MessageStore.shared
 
     init() {
         ClientManager.instance.register(LoginClient.self,   client: LoginClientApi.client)
@@ -36,9 +42,15 @@ struct parkeerassistentApp: App {
 
         WindowGroup {
             ContentView()
-                .environmentObject(app)
+                .environmentObject(session)
+                .environmentObject(accounts)
                 .environmentObject(user)
-                .environmentObject(messenger)
+                .environmentObject(visitors)
+                .environmentObject(parkings)
+                .environmentObject(parkingMeter)
+                .environmentObject(payment)
+                .environmentObject(router)
+                .environmentObject(messages)
         }
     }
 

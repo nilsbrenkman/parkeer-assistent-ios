@@ -9,7 +9,8 @@ import SwiftUI
 
 struct AccountDetailView: View {
 
-    @EnvironmentObject var app: AppModel
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var accounts: AccountStore
 
     var account: Credentials
 
@@ -69,17 +70,17 @@ struct AccountDetailView: View {
             account.username.isEmpty
                 ? Lang.Account.newAccount.localized()
                 : Lang.Account.details.localized(),
-            dismiss: app.popScreen
+            dismiss: router.popScreen
         )
     }
 
     private func save() {
         if account.username.isEmpty {
-            app.addAccount(username: username, password: password, alias: alias)
+            accounts.addAccount(username: username, password: password, alias: alias)
         } else {
-            app.updateAccount(account, username: username, password: password, alias: alias)
+            accounts.updateAccount(account, username: username, password: password, alias: alias)
         }
-        app.popScreen()
+        router.popScreen()
     }
 
 }

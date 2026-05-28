@@ -11,40 +11,42 @@ import SwiftUI
 @MainActor
 struct UserView: View {
 
-    @EnvironmentObject var user: UserModel
-    @EnvironmentObject var messenger: AppMessenger
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var visitors: VisitorStore
+    @EnvironmentObject var parkings: ParkingStore
+    @EnvironmentObject var messages: MessageStore
+    @EnvironmentObject var payment: PaymentStore
 
     @State private var refreshTask: Task<Void, Never>?
 
     var body: some View {
-
         Form {
-
             ParkingView()
-
             VisitorListView()
-
         }
         .listStyle(.insetGrouped)
         .padding(.top, Constants.padding.normal)
         .onAppear {
-            if user.isPaymentInProgress {
+            if payment.isPaymentInProgress {
                 let oldBalance = user.balance
                 Task {
                     for i in 1..<11 {
                         try? await Task.sleep(nanoseconds: UInt64(i) * 1_000_000_000)
                         await user.getBalance()
                         if user.balance != oldBalance {
-                            messenger.addMessage(message: Lang.Payment.successMsg.localized(), type: .SUCCESS)
+                            messages.addMessage(Lang.Payment.successMsg.localized(), type: .SUCCESS)
                             break
                         }
                     }
-                    user.isPaymentInProgress = false
+                    payment.isPaymentInProgress = false
                 }
             }
             if !user.isLoaded {
                 Task {
-                    await user.getUser()
+                    await visitors.getVisitors()
+                    await user.getUser {
+                        await parkings.getParking()
+                    }
                     user.isLoaded = true
                     startRefreshTask()
                 }
@@ -92,7 +94,7 @@ struct UserView: View {
 
                 Log.debug("Running refresh task")
 
-                guard let parking = await user.parking else {
+                guard let parking = parkings.parking else {
                     Log.warning("No parking data, wait 10 seconds")
                     try? await Task.sleep(nanoseconds: UInt64(10 * 1000000000))
                     continue
@@ -108,7 +110,7 @@ struct UserView: View {
                 if delay > 0 {
                     try? await Task.sleep(nanoseconds: UInt64(delay * 1000000000))
                 }
-                await user.getParking()
+                await parkings.getParking()
             }
             Log.debug("Exiting refresh task")
         }

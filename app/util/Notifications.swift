@@ -21,43 +21,44 @@ class Notifications {
     static let INTERVAL_LABELS = ["15 m", "30 m", "1 h", "2 h", "3 h", "4 h"]
 
     var authorised = false
+    var visitors: [Visitor]? = nil
 
     private init() {
         //
     }
 
-    func parking(_ parking: ParkingResponse, visitors: [Visitor]?) {
+    func parking(_ parking: ParkingResponse) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         for parking in parking.active {
-            do { try scheduleReminders(parking, visitors: visitors) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
-            do { try scheduleEnd(parking, visitors: visitors) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleReminders(parking) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleEnd(parking) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
         }
         for parking in parking.scheduled {
-            do { try scheduleStart(parking, visitors: visitors) } catch { Log.error("scheduleStart failed for parking \(parking.id): \(error.localizedDescription)") }
-            do { try scheduleEnd(parking, visitors: visitors) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
-            do { try scheduleReminders(parking, visitors: visitors) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleStart(parking) } catch { Log.error("scheduleStart failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleEnd(parking) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleReminders(parking) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
         }
     }
 
-    func scheduleStart(_ parking: Parking, visitors: [Visitor]?) throws {
+    func scheduleStart(_ parking: Parking) throws {
         if !UserDefaults.standard.bool(forKey: Notifications.START_KEY) {
             return
         }
-        let subtitle = try subtitle(parking, visitors: visitors)
+        let subtitle = try subtitle(parking)
         let date = try Util.parseDate(parking.startTime)
         schedule(String(format: "\(parking.id)_start"), title: "Parkeer sessie begint", subtitle: subtitle, date: date)
     }
 
-    func scheduleEnd(_ parking: Parking, visitors: [Visitor]?) throws {
+    func scheduleEnd(_ parking: Parking) throws {
         if !UserDefaults.standard.bool(forKey: Notifications.STOP_KEY) {
             return
         }
-        let subtitle = try subtitle(parking, visitors: visitors)
+        let subtitle = try subtitle(parking)
         let date = try Util.parseDate(parking.endTime)
         schedule(String(format: "\(parking.id)_end"), title: "Parkeer sessie loopt af", subtitle: subtitle, date: date)
     }
 
-    func scheduleReminders(_ parking: Parking, visitors: [Visitor]?) throws {
+    func scheduleReminders(_ parking: Parking) throws {
         if !UserDefaults.standard.bool(forKey: Notifications.REMINDER_KEY) {
             return
         }
@@ -68,7 +69,7 @@ class Notifications {
             reminder = reminder.addingTimeInterval(TimeInterval(interval))
         }
         let stop = try Util.parseDate(parking.endTime)
-        let subtitle = try subtitle(parking, visitors: visitors)
+        let subtitle = try subtitle(parking)
         var counter = 0
         while reminder.timeIntervalSince(stop) < 0 {
             schedule(String(format: "\(parking.id)_reminder_\(counter)"), title: "Herinnering", subtitle: subtitle, date: reminder)
@@ -77,7 +78,7 @@ class Notifications {
         }
     }
 
-    func subtitle(_ parking: Parking, visitors: [Visitor]?) throws -> String {
+    func subtitle(_ parking: Parking) throws -> String {
         guard let visitor = Util.getVisitor(parking, visitors: visitors) else {
             Log.warning("Notifications.subtitle: visitor not found for parking \(parking.id) license '\(parking.license)'")
             throw GenericError.VisitorNotFound

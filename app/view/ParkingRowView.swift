@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 struct ParkingRowView: View {
 
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var visitors: VisitorStore
 
     var parking: Parking
 
@@ -19,7 +19,7 @@ struct ParkingRowView: View {
         HStack {
             LicenseView(license: parking.license)
 
-            Text("\(user.getName(from: parking.license))")
+            Text("\(visitors.getName(from: parking.license))")
                 .font( /*@START_MENU_TOKEN@*/.title3 /*@END_MENU_TOKEN@*/)
                 .bold()
                 .padding(.leading)

@@ -10,12 +10,13 @@ import SwiftUI
 @MainActor
 struct ParkingView: View {
 
-    @EnvironmentObject var user: UserModel
-
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var parkings: ParkingStore
+    
     var body: some View {
 
         Section(header: SectionHeader(Lang.Parking.header.localized())) {
-            if let parking = $user.parking.wrappedValue {
+            if let parking = $parkings.parking.wrappedValue {
                 if parking.active.isEmpty && parking.scheduled.isEmpty {
                     Text(Lang.Parking.noSessions.localized())
                         .foregroundStyle(.secondary)

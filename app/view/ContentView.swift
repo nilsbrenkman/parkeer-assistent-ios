@@ -12,15 +12,16 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
-    @EnvironmentObject var messenger: AppMessenger
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var messages: MessageStore
     
     @State var initialised = false
 
     var body: some View {
         
-        NavigationStack(path: $app.path) {
+        NavigationStack(path: $router.path) {
             
             LoadingView()
                 .navigationDestination(for: Screen.self) { screen in
@@ -55,39 +56,39 @@ struct ContentView: View {
                     }
                 }
         }
-        .message(message: $messenger.message)
+        .message(message: $messages.message)
         .onAppear {
             if !initialised {
                 Task {
-                    await app.loggedIn()
-                    app.user = user
+                    await session.loggedIn()
                     initialised = true
                 }
             }
         }
         .onChange(of: scenePhase) { phase, initial in
             if phase == .background {
-                app.isBackground = true
-            } else if app.isBackground {
-                app.isBackground = false
+                session.isBackground = true
+            } else if session.isBackground {
+                session.isBackground = false
                 Task {
-                    await app.loggedIn()
+                    await session.loggedIn()
                 }
             }
         }
-        .onChange(of: app.isLoggedIn) { onChangeRoot() }
-        .onChange(of: app.isLoading) { onChangeRoot() }
-        .onChange(of: app.isBackground) { onChangeRoot() }
+        .onChange(of: session.isLoggedIn) { onChangeRoot() }
+        .onChange(of: session.isLoading) { onChangeRoot() }
+        .onChange(of: session.isBackground) { onChangeRoot() }
     }
     
     private func onChangeRoot() {
-        if app.isLoading || app.isBackground {
-            app.path = []
+        if session.isLoading || session.isBackground {
+            router.path = []
         } else {
-            if app.isLoggedIn {
-                app.path = [Screen.user]
+            if session.isLoggedIn {
+                router.path = [Screen.user]
             } else {
-                app.path = [Screen.login]
+                router.path = [Screen.login]
+                user.isLoaded = false
             }
         }
     }

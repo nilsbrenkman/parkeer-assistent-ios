@@ -10,7 +10,8 @@ import SwiftUI
 @MainActor
 struct ParkingListView: View {
 
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var parkings: ParkingStore
 
     var title: String
     var parkingList: [Parking]
@@ -26,7 +27,7 @@ struct ParkingListView: View {
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
                         Task {
-                            await user.stopParking(parking)
+                            await parkings.stopParking(parking, user: user)
                         }
                     } label: {
                         Image(systemName: "trash")

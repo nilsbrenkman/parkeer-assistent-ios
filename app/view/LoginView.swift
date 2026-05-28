@@ -12,7 +12,8 @@ struct LoginView: View {
 
     @Environment(\.scenePhase) private var scenePhase
 
-    @EnvironmentObject var app: AppModel
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var accounts: AccountStore
 
     @State private var username: String = ""
     @State private var password: String = ""
@@ -54,7 +55,7 @@ struct LoginView: View {
                 }
                 .style(.success, disabled: username.count == 0 || password.count == 0)
             }
-            if app.accounts.isEmpty {
+            if accounts.accounts.isEmpty {
                 if authenticationFailed {
                     Section {
                         HStack {
@@ -64,7 +65,7 @@ struct LoginView: View {
                                 .scaledToFit()
                                 .frame(width: 50, height: 50)
                                 .onTapGesture {
-                                    app.autoLogin = true
+                                    session.autoLogin = true
                                     authenticate()
                                 }
                             Spacer()
@@ -78,8 +79,8 @@ struct LoginView: View {
                 }
             } else {
                 Section {
-                    Picker(Lang.Account.label.localized(), selection: $app.activeAccount) {
-                        ForEach(app.accounts) { _account in
+                    Picker(Lang.Account.label.localized(), selection: $accounts.activeAccount) {
+                        ForEach(accounts.accounts) { _account in
                             Text(_account.alias ?? _account.username).tag(_account)
                         }
                     }
@@ -99,8 +100,8 @@ struct LoginView: View {
                 }
             }
         }
-        .onChange(of: app.activeAccount) {
-            if let selectedAccount = app.activeAccount {
+        .onChange(of: accounts.activeAccount) {
+            if let selectedAccount = accounts.activeAccount {
                 changeAccount(selectedAccount)
             }
         }
@@ -110,9 +111,9 @@ struct LoginView: View {
         if !wait {
             Task {
                 wait = true
-                await app.login(username: username,
-                                  password: password,
-                                  storeCredentials: storeCredentials)
+                await session.login(username: username,
+                                    password: password,
+                                    storeCredentials: storeCredentials)
                 wait = false
             }
         }
@@ -121,7 +122,7 @@ struct LoginView: View {
     private func authenticate() {
         Task {
             do {
-                try await app.loadAccounts()
+                try await accounts.loadAccounts()
             } catch AuthenticationError.Unavailable {
                 canAuthenticate = false
                 username = ""
@@ -139,13 +140,13 @@ struct LoginView: View {
                 return
             }
 
-            if let account = app.activeAccount, username.isEmpty {
+            if let account = accounts.activeAccount, username.isEmpty {
                 username = account.username
                 password = account.password
             }
 
-            if app.autoLogin && Keychain.autoLogin() {
-                app.autoLogin = false
+            if session.autoLogin && Keychain.autoLogin() {
+                session.autoLogin = false
                 startLogin()
             }
         }

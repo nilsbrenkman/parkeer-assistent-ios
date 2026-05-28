@@ -36,9 +36,8 @@
 		298F7D88268287A200D75A5C /* AddVisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F7D87268287A200D75A5C /* AddVisitorView.swift */; };
 		298F7D8E2688BDAB00D75A5C /* LicenseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F7D8D2688BDAB00D75A5C /* LicenseTest.swift */; };
 		298F7D902688CDD800D75A5C /* AddParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298F7D8F2688CDD700D75A5C /* AddParkingView.swift */; };
-		299395C0271B1DD500B1AB57 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395B4271B1DC100B1AB57 /* AppModel.swift */; };
-		299395C3271B1DD500B1AB57 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395B6271B1DC100B1AB57 /* UserModel.swift */; };
-		299395C4271B1DD500B1AB57 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395B3271B1DC100B1AB57 /* Messenger.swift */; };
+		299395C0271B1DD500B1AB57 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395B4271B1DC100B1AB57 /* SessionStore.swift */; };
+		299395C3271B1DD500B1AB57 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395B6271B1DC100B1AB57 /* UserStore.swift */; };
 		299395E1271B4A9800B1AB57 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395DE271B4A9700B1AB57 /* Util.swift */; };
 		299395E3271B4A9800B1AB57 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395DF271B4A9800B1AB57 /* License.swift */; };
 		299395E5271B4A9800B1AB57 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395E0271B4A9800B1AB57 /* Model.swift */; };
@@ -50,12 +49,18 @@
 		299395F9271B4B0400B1AB57 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395ED271B4B0300B1AB57 /* ClientManager.swift */; };
 		299395FB271B4B0400B1AB57 /* VisitorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395EE271B4B0300B1AB57 /* VisitorClient.swift */; };
 		299395FF271B4C9700B1AB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 299395FE271B4C9700B1AB57 /* Assets.xcassets */; };
-		29939681271F6DA800B1AB57 /* AppMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29939680271F6DA800B1AB57 /* AppMessenger.swift */; };
 		2994A45326CF251200332807 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2994A45226CF251200332807 /* PaymentView.swift */; };
 		29AD3BF226CF42B10082E913 /* InsetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD3BF126CF42B10082E913 /* InsetPicker.swift */; };
 		29AD3BFE26D572470082E913 /* Language.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29AD3C0026D572470082E913 /* Language.strings */; };
 		29AD3C0526D57A9C0082E913 /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD3C0426D57A9C0082E913 /* Lang.swift */; };
 		29AE299C27B58D9300A00FDF /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE299B27B58D9300A00FDF /* AccountView.swift */; };
+		29AF77412FC8D46700BFF3FA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF77402FC8D46700BFF3FA /* Router.swift */; };
+		29AF77432FC8D55B00BFF3FA /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF77422FC8D55B00BFF3FA /* AccountStore.swift */; };
+		29AF77452FC8D73D00BFF3FA /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF77442FC8D73D00BFF3FA /* PaymentStore.swift */; };
+		29AF77472FC8D81600BFF3FA /* VisitorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF77462FC8D81600BFF3FA /* VisitorStore.swift */; };
+		29AF77492FC8D92A00BFF3FA /* ParkingMeterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF77482FC8D92A00BFF3FA /* ParkingMeterStore.swift */; };
+		29AF774B2FC8DF3F00BFF3FA /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF774A2FC8DF3F00BFF3FA /* MessageStore.swift */; };
+		29AF774D2FC8E2AD00BFF3FA /* ParkingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF774C2FC8E2AD00BFF3FA /* ParkingStore.swift */; };
 		29B827B826755F820025E717 /* parkeerassistentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B827B726755F820025E717 /* parkeerassistentApp.swift */; };
 		29B827BA26755F820025E717 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B827B926755F820025E717 /* ContentView.swift */; };
 		29B827BF26755F840025E717 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B827BE26755F840025E717 /* Preview Assets.xcassets */; };
@@ -136,9 +141,8 @@
 		298F7D87268287A200D75A5C /* AddVisitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVisitorView.swift; sourceTree = "<group>"; };
 		298F7D8D2688BDAB00D75A5C /* LicenseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTest.swift; sourceTree = "<group>"; };
 		298F7D8F2688CDD700D75A5C /* AddParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingView.swift; sourceTree = "<group>"; };
-		299395B3271B1DC100B1AB57 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
-		299395B4271B1DC100B1AB57 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		299395B6271B1DC100B1AB57 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		299395B4271B1DC100B1AB57 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		299395B6271B1DC100B1AB57 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		299395DE271B4A9700B1AB57 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		299395DF271B4A9800B1AB57 /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
 		299395E0271B4A9800B1AB57 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -150,12 +154,18 @@
 		299395ED271B4B0300B1AB57 /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		299395EE271B4B0300B1AB57 /* VisitorClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorClient.swift; sourceTree = "<group>"; };
 		299395FE271B4C9700B1AB57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		29939680271F6DA800B1AB57 /* AppMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMessenger.swift; sourceTree = "<group>"; };
 		2994A45226CF251200332807 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		29AD3BF126CF42B10082E913 /* InsetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetPicker.swift; sourceTree = "<group>"; };
 		29AD3BFF26D572470082E913 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Language.strings; sourceTree = "<group>"; };
 		29AD3C0426D57A9C0082E913 /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
 		29AE299B27B58D9300A00FDF /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		29AF77402FC8D46700BFF3FA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		29AF77422FC8D55B00BFF3FA /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		29AF77442FC8D73D00BFF3FA /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
+		29AF77462FC8D81600BFF3FA /* VisitorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorStore.swift; sourceTree = "<group>"; };
+		29AF77482FC8D92A00BFF3FA /* ParkingMeterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingMeterStore.swift; sourceTree = "<group>"; };
+		29AF774A2FC8DF3F00BFF3FA /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
+		29AF774C2FC8E2AD00BFF3FA /* ParkingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingStore.swift; sourceTree = "<group>"; };
 		29B827B426755F820025E717 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B827B726755F820025E717 /* parkeerassistentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parkeerassistentApp.swift; sourceTree = "<group>"; };
 		29B827B926755F820025E717 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -278,10 +288,15 @@
 		299395B2271B1DC100B1AB57 /* state */ = {
 			isa = PBXGroup;
 			children = (
-				29939680271F6DA800B1AB57 /* AppMessenger.swift */,
-				299395B4271B1DC100B1AB57 /* AppModel.swift */,
-				299395B3271B1DC100B1AB57 /* Messenger.swift */,
-				299395B6271B1DC100B1AB57 /* UserModel.swift */,
+				29AF77422FC8D55B00BFF3FA /* AccountStore.swift */,
+				29AF774A2FC8DF3F00BFF3FA /* MessageStore.swift */,
+				29AF77482FC8D92A00BFF3FA /* ParkingMeterStore.swift */,
+				29AF774C2FC8E2AD00BFF3FA /* ParkingStore.swift */,
+				29AF77442FC8D73D00BFF3FA /* PaymentStore.swift */,
+				29AF77402FC8D46700BFF3FA /* Router.swift */,
+				299395B4271B1DC100B1AB57 /* SessionStore.swift */,
+				299395B6271B1DC100B1AB57 /* UserStore.swift */,
+				29AF77462FC8D81600BFF3FA /* VisitorStore.swift */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -562,10 +577,11 @@
 				298F7D88268287A200D75A5C /* AddVisitorView.swift in Sources */,
 				299395FB271B4B0400B1AB57 /* VisitorClient.swift in Sources */,
 				2994A45326CF251200332807 /* PaymentView.swift in Sources */,
+				29AF774B2FC8DF3F00BFF3FA /* MessageStore.swift in Sources */,
 				291988C4268B5CCB00B289F0 /* WheelSelector.swift in Sources */,
 				29AE299C27B58D9300A00FDF /* AccountView.swift in Sources */,
 				29CCB0CA27445DAA00504164 /* HistoryView.swift in Sources */,
-				299395C4271B1DD500B1AB57 /* Messenger.swift in Sources */,
+				29AF77432FC8D55B00BFF3FA /* AccountStore.swift in Sources */,
 				29D4F73C26B9BBCE00600D33 /* ButtonWait.swift in Sources */,
 				291988CA268B83B100B289F0 /* ParkingRowView.swift in Sources */,
 				298F7D902688CDD800D75A5C /* AddParkingView.swift in Sources */,
@@ -576,6 +592,7 @@
 				295E91C527BEF55000A1929E /* Preview.swift in Sources */,
 				291988C2268B4F1E00B289F0 /* DataBox.swift in Sources */,
 				29B827E9267564420025E717 /* LoginView.swift in Sources */,
+				29AF77472FC8D81600BFF3FA /* VisitorStore.swift in Sources */,
 				299395F5271B4B0400B1AB57 /* ParkingClient.swift in Sources */,
 				29D4F72F26B89D2900600D33 /* InfoView.swift in Sources */,
 				29AD3C0526D57A9C0082E913 /* Lang.swift in Sources */,
@@ -590,23 +607,26 @@
 				298F7D8226825EC900D75A5C /* VisitorListView.swift in Sources */,
 				29FE2B3D2B23DD1B003510EA /* SettingsView.swift in Sources */,
 				29CCB0CC274478E300504164 /* CalendarDate.swift in Sources */,
+				29AF77452FC8D73D00BFF3FA /* PaymentStore.swift in Sources */,
 				298632A126CBEBCE00990215 /* Font.swift in Sources */,
 				290B2315268BF98600266920 /* HeaderView.swift in Sources */,
 				292A1D0A267D53F700F14A59 /* LoadingView.swift in Sources */,
 				291988C8268B82B700B289F0 /* ParkingListView.swift in Sources */,
+				29AF774D2FC8E2AD00BFF3FA /* ParkingStore.swift in Sources */,
 				29D4F74126B9D2EB00600D33 /* Color.swift in Sources */,
 				298F7D862682639300D75A5C /* LicenseView.swift in Sources */,
 				299395E1271B4A9800B1AB57 /* Util.swift in Sources */,
-				299395C0271B1DD500B1AB57 /* AppModel.swift in Sources */,
-				29939681271F6DA800B1AB57 /* AppMessenger.swift in Sources */,
+				299395C0271B1DD500B1AB57 /* SessionStore.swift in Sources */,
+				29AF77412FC8D46700BFF3FA /* Router.swift in Sources */,
 				299395F1271B4B0400B1AB57 /* ApiClient.swift in Sources */,
 				2973F4362B2700210004DEB8 /* PageTitle.swift in Sources */,
 				29F7B15B269CD6900079EF92 /* Notifications.swift in Sources */,
 				29F7B14C2690C14F0079EF92 /* MessageView.swift in Sources */,
 				299395F3271B4B0400B1AB57 /* PaymentClient.swift in Sources */,
-				299395C3271B1DD500B1AB57 /* UserModel.swift in Sources */,
+				299395C3271B1DD500B1AB57 /* UserStore.swift in Sources */,
 				2951455F2B245E3200ACD607 /* AccountDetailView.swift in Sources */,
 				29600FC72EC32A1400BD4725 /* GeoClient.swift in Sources */,
+				29AF77492FC8D92A00BFF3FA /* ParkingMeterStore.swift in Sources */,
 				299395F7271B4B0400B1AB57 /* LoginClient.swift in Sources */,
 				29D4F74526B9E07000600D33 /* Button.swift in Sources */,
 				29AD3BF226CF42B10082E913 /* InsetPicker.swift in Sources */,
@@ -824,7 +844,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.parkeer-assistent.amsterdam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -854,7 +874,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.parkeer-assistent.amsterdam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

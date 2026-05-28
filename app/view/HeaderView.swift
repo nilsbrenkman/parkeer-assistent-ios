@@ -9,8 +9,9 @@ import SwiftUI
 
 struct HeaderView: View {
     
-    @EnvironmentObject var app: AppModel
-    @EnvironmentObject var user: UserModel
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var router: Router
     
     let loggedIn: Bool
     
@@ -31,24 +32,24 @@ struct HeaderView: View {
                         .frame(height: 48)
                         .animation(.linear, value: 0)
                         .onTapGesture {
-                            app.pushScreen(.info)
+                            router.pushScreen(.info)
                         }
                     Spacer()
                     if loggedIn {
                         Menu {
-                            Button(action: { app.pushScreen(.history) }) {
+                            Button(action: { router.pushScreen(.history) }) {
                                 Text(Lang.Parking.history.localized())
                                 Image(systemName: "clock")
                             }
-                            Button(action: { app.pushScreen(.payment) }) {
+                            Button(action: { router.pushScreen(.payment) }) {
                                 Text(Lang.User.addBalance.localized())
                                 Image(systemName: "eurosign.circle")
                             }
-                            Button(action: { app.pushScreen(.accounts) }) {
+                            Button(action: { router.pushScreen(.accounts) }) {
                                 Text(Lang.Account.header.localized())
                                 Image(systemName: "person")
                             }
-                            Button(action: { app.pushScreen(.settings) }) {
+                            Button(action: { router.pushScreen(.settings) }) {
                                 Text(Lang.Settings.header.localized())
                                 Image(systemName: "gearshape")
                             }
@@ -81,7 +82,7 @@ struct HeaderView: View {
                     Text("\(Lang.User.balance.localized()):")
                         .foregroundColor(Color.ui.header)
                         .padding(.vertical, 8)
-                    Text("€ \(user.balance ?? "")")
+                    Text("€ \(user.balance ?? "--")")
                         .bold()
                         .foregroundColor(Color.ui.header)
                         .padding(.vertical, 8)
@@ -106,7 +107,7 @@ struct HeaderView: View {
     
     private func logout() {
         Task {
-            await app.logout()
+            await session.logout()
         }
     }
     
