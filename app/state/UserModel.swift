@@ -51,7 +51,13 @@ class UserModel: ObservableObject {
     }
     
     func getUser() async {
-        guard let response = try? await userClient.get() else { return }
+        let response: UserResponse
+        do {
+            response = try await userClient.get()
+        } catch {
+            Log.error("getUser failed: \(error.localizedDescription)")
+            return
+        }
         
         balance = response.balance
         hourRate = response.hourRate
@@ -67,7 +73,13 @@ class UserModel: ObservableObject {
     }
     
     func getBalance() async {
-        guard let response = try? await userClient.balance() else { return }
+        let response: BalanceResponse
+        do {
+            response = try await userClient.balance()
+        } catch {
+            Log.error("getBalance failed: \(error.localizedDescription)")
+            return
+        }
         
         if response.balance == balance {
             return
@@ -104,7 +116,13 @@ class UserModel: ObservableObject {
     }
     
     func getVisitors() async {
-        guard let response = try? await visitorClient.get() else { return }
+        let response: VisitorResponse
+        do {
+            response = try await visitorClient.get()
+        } catch {
+            Log.error("getVisitors failed: \(error.localizedDescription)")
+            return
+        }
         
         let sorted = response.visitors.sorted()
         if sorted == visitors {
@@ -114,7 +132,13 @@ class UserModel: ObservableObject {
     }
     
     func addVisitor(license: String, name: String, onSuccess: (() -> Void)? = nil) async {
-        guard let response = try? await visitorClient.add(license: license, name: name) else { return }
+        let response: Response
+        do {
+            response = try await visitorClient.add(license: license, name: name)
+        } catch {
+            Log.error("addVisitor failed: \(error.localizedDescription)")
+            return
+        }
         
         if response.success {
             onSuccess?()
@@ -127,7 +151,13 @@ class UserModel: ObservableObject {
     }
     
     func deleteVisitor(_ visitor: Visitor) async {
-        guard let response = try? await visitorClient.delete(visitor) else { return }
+        let response: Response
+        do {
+            response = try await visitorClient.delete(visitor)
+        } catch {
+            Log.error("deleteVisitor failed: \(error.localizedDescription)")
+            return
+        }
         
         if !response.success {
             MessageManager.instance.addMessage(response.message, type: Type.ERROR)
@@ -136,7 +166,13 @@ class UserModel: ObservableObject {
     }
     
     func getParking() async {
-        guard let response = try? await parkingClient.get() else { return }
+        let response: ParkingResponse
+        do {
+            response = try await parkingClient.get()
+        } catch {
+            Log.error("getParking failed: \(error.localizedDescription)")
+            return
+        }
         
         Notifications.store.parking(response, visitors: visitors)
         
@@ -151,7 +187,11 @@ class UserModel: ObservableObject {
         self.parkingMeterId = parkingMeterId
         
         Task {
-            guard let response = try? await userClient.regime(parkingMeterId: parkingMeterId) else {
+            let response: RegimeResponse
+            do {
+                response = try await userClient.regime(parkingMeterId: parkingMeterId)
+            } catch {
+                Log.error("setParkingMeter regime fetch failed: \(error.localizedDescription)")
                 MessageManager.instance.addMessage("Invalid zone", type: Type.ERROR)
                 return
             }
@@ -162,12 +202,16 @@ class UserModel: ObservableObject {
     }
     
     func startParking(_ visitor: Visitor, timeMinutes: Int, start: Date, onSuccess: (() -> Void)? = nil) async {
-        guard let response = try? await parkingClient.start(visitor: visitor,
-                                                            timeMinutes: timeMinutes,
-                                                            start: start,
-                                                            productId: productId ?? 0,
-                                                            zoneId: zoneId ?? 0,
-                                                            parkingMeterId: parkingMeterId ?? 0) else {
+        let response: Response
+        do {
+            response = try await parkingClient.start(visitor: visitor,
+                                                     timeMinutes: timeMinutes,
+                                                     start: start,
+                                                     productId: productId ?? 0,
+                                                     zoneId: zoneId ?? 0,
+                                                     parkingMeterId: parkingMeterId ?? 0)
+        } catch {
+            Log.error("startParking failed: \(error.localizedDescription)")
             return
         }
         
@@ -194,7 +238,13 @@ class UserModel: ObservableObject {
             }))
         )
         
-        guard let response = try? await parkingClient.stop(parking) else { return }
+        let response: Response
+        do {
+            response = try await parkingClient.stop(parking)
+        } catch {
+            Log.error("stopParking failed: \(error.localizedDescription)")
+            return
+        }
         
         if !response.success {
             MessageManager.instance.addMessage(response.message, type: Type.ERROR)
@@ -216,7 +266,11 @@ class UserModel: ObservableObject {
     }
     
     func payment(amount: Int, brand: String, onSuccess: ((String) -> Void)) async {
-        guard let response = try? await paymentClient.payment(amount: amount, brand: brand) else {
+        let response: PaymentResponse
+        do {
+            response = try await paymentClient.payment(amount: amount, brand: brand)
+        } catch {
+            Log.error("payment failed: \(error.localizedDescription)")
             return
         }
         self.isPaymentInProgress = true

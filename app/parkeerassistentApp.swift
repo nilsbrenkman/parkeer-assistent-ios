@@ -12,8 +12,20 @@ struct parkeerassistentApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    @StateObject var app = try! AppModel()
-    @StateObject var user = try! UserModel()
+    @StateObject var app: AppModel = {
+        do {
+            return try AppModel()
+        } catch {
+            fatalError("Failed to initialize AppModel: \(error)")
+        }
+    }()
+    @StateObject var user: UserModel = {
+        do {
+            return try UserModel()
+        } catch {
+            fatalError("Failed to initialize UserModel: \(error)")
+        }
+    }()
     @StateObject var messenger = AppMessenger()
 
     static let versionKey = "version"

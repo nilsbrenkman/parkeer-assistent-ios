@@ -87,7 +87,11 @@ class AppModel: ObservableObject, ErrorHandler {
     func loggedIn() async {
         isLoading = true
         
-        guard let response = try? await loginClient.loggedId() else {
+        let response: Response
+        do {
+            response = try await loginClient.loggedId()
+        } catch {
+            Log.error("loggedIn check failed: \(error.localizedDescription)")
             isLoggedIn = false
             isLoading = false
             return
@@ -139,10 +143,13 @@ class AppModel: ObservableObject, ErrorHandler {
     func logout() async {
         isLoading = true
         
-        if let response = try? await loginClient.logout() {
+        do {
+            let response = try await loginClient.logout()
             if !response.success {
                 MessageManager.instance.addMessage(response.message, type: Type.ERROR)
             }
+        } catch {
+            Log.error("logout failed: \(error.localizedDescription)")
         }
         
         clearUser()
@@ -156,11 +163,11 @@ class AppModel: ObservableObject, ErrorHandler {
         Keychain.setRecent(account?.username ?? "")
     }
     
-    func loadAccounts() throws {
+    func loadAccounts() async throws {
         let context = LAContext()
         var error: NSError?
         
-        if authenticated != nil && authenticated!.addingTimeInterval(5 * 60) > Date.now() {
+        if let authenticated, authenticated.addingTimeInterval(5 * 60) > Date.now() {
             return
         }
         
@@ -171,37 +178,41 @@ class AppModel: ObservableObject, ErrorHandler {
         let stored = Keychain.retrieveCredentials()
         if stored.isEmpty {
             accounts = []
+            return
         }
         
         let reason = Lang.Login.reason.localized()
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        var success: Bool = false
-        
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { authentication, _ in
-            success = authentication
-            semaphore.signal()
+        let success = await withCheckedContinuation { continuation in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { authentication, _ in
+                continuation.resume(returning: authentication)
+            }
         }
         
-        semaphore.wait()
-        
-        if success {
-            accounts = stored
-            activeAccount = Keychain.getRecent(accounts) ?? accounts.first
-            authenticated = Date.now()
-        } else {
+        guard success else {
             throw AuthenticationError.Failed
         }
+        
+        accounts = stored
+        activeAccount = Keychain.getRecent(accounts) ?? accounts.first
+        authenticated = Date.now()
     }
     
     func addAccount(username: String, password: String, alias: String?) {
-        try? Keychain.storeCredentials(username: username, password: password, alias: alias)
+        do {
+            try Keychain.storeCredentials(username: username, password: password, alias: alias)
+        } catch {
+            Log.error("addAccount Keychain store failed: \(error.localizedDescription)")
+        }
         accounts = Keychain.retrieveCredentials()
     }
     
     func updateAccount(_ account: Credentials, username: String, password: String, alias: String?) {
         let isRecent = Keychain.getRecent(accounts)?.username == account.username
-        try? Keychain.updateCredentials(account, username: username, password: password, alias: alias)
+        do {
+            try Keychain.updateCredentials(account, username: username, password: password, alias: alias)
+        } catch {
+            Log.error("updateAccount Keychain update failed: \(error.localizedDescription)")
+        }
         accounts = Keychain.retrieveCredentials()
         if isRecent {
             Keychain.setRecent(username)
@@ -210,7 +221,11 @@ class AppModel: ObservableObject, ErrorHandler {
     
     func deleteAccount(_ account: Credentials) {
         let isRecent = Keychain.getRecent(accounts)?.username == account.username
-        try? Keychain.deleteCredentials(account: account)
+        do {
+            try Keychain.deleteCredentials(account: account)
+        } catch {
+            Log.error("deleteAccount Keychain delete failed: \(error.localizedDescription)")
+        }
         accounts = Keychain.retrieveCredentials()
         if isRecent {
             Keychain.setRecent(accounts.first?.username)

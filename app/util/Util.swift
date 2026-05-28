@@ -87,8 +87,13 @@ class Util {
     }
 
     static func getSetting(_ name: String) -> String {
-        let settings = Bundle.main.infoDictionary?["AppSettings"] as! [AnyHashable: Any]
-        return settings[name] as! String
+        guard let settings = Bundle.main.infoDictionary?["AppSettings"] as? [AnyHashable: Any] else {
+            fatalError("Info.plist is missing the 'AppSettings' dictionary")
+        }
+        guard let value = settings[name] as? String else {
+            fatalError("AppSettings is missing string value for '\(name)'")
+        }
+        return value
     }
 
     static func isUITest() -> Bool {

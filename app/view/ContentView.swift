@@ -17,16 +17,7 @@ struct ContentView: View {
     @EnvironmentObject var messenger: AppMessenger
     
     @State var initialised = false
-    @State var showInfo = false
-    @State var showHistory = false
-    @State var showAccounts = false
-    @State var showSettings = false
-    
-    @State var showLogin: Bool = false
-    @State var showUser: Bool = false
-    
-    let semaphore = DispatchSemaphore(value: 2)
-    
+
     var body: some View {
         
         NavigationStack(path: $app.path) {
@@ -67,17 +58,10 @@ struct ContentView: View {
         .message(message: $messenger.message)
         .onAppear {
             if !initialised {
-                semaphore.wait()
-                print("take")
                 Task {
                     await app.loggedIn()
-                    initialised = true
                     app.user = user
-                }
-                Task {
-                    try await Task.sleep(nanoseconds: 1_000_000)
-                    print("release")
-                    semaphore.signal()
+                    initialised = true
                 }
             }
         }

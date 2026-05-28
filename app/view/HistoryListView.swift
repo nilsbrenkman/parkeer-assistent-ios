@@ -59,9 +59,13 @@ struct HistoryListView: View {
         .listStyle(InsetGroupedListStyle())
         .onAppear {
             Task {
-                let parkingClient = try! ClientManager.instance.get(ParkingClient.self)
-                let response = try await parkingClient.history()
-                self.history = response.history
+                do {
+                    let parkingClient = try ClientManager.instance.get(ParkingClient.self)
+                    let response = try await parkingClient.history()
+                    self.history = response.history
+                } catch {
+                    Log.error("history load failed: \(error.localizedDescription)")
+                }
             }
         }
         .pageTitle(Lang.Parking.history.localized(), dismiss: app.popScreen)

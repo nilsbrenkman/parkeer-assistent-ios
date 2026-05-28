@@ -25,7 +25,10 @@ class ApiClient {
     private init() {
         baseUrl = Util.getSetting("ServerBaseURL")
         session = URLSession(configuration: .default)
-        url = URL(string: baseUrl)!
+        guard let url = URL(string: baseUrl) else {
+            fatalError("ServerBaseURL is not a valid URL: \(baseUrl)")
+        }
+        self.url = url
         cookies = SessionCookies()
 
         if let json = UserDefaults.standard.string(forKey: ApiClient.COOKIE_KEY) {
@@ -70,7 +73,11 @@ class ApiClient {
             request.httpMethod = method.rawValue
 
             if body != nil {
-                guard let json = try? JSONEncoder().encode(body) else {
+                let json: Data
+                do {
+                    json = try JSONEncoder().encode(body)
+                } catch {
+                    Log.error("Request body encoding failed for \(url): \(error.localizedDescription)")
                     throw ClientError.RequestSerialization
                 }
                 Log.debug("Body: \(String(decoding: json, as: UTF8.self))")
@@ -100,11 +107,12 @@ class ApiClient {
 
             Log.debug("Response: \(String(decoding: data, as: UTF8.self))")
 
-            guard let result = try? JSONDecoder().decode(RESPONSE.self, from: data) else {
+            do {
+                return try JSONDecoder().decode(RESPONSE.self, from: data)
+            } catch {
+                Log.error("Response decoding failed for \(url): \(error.localizedDescription)")
                 throw ClientError.ResponseSerialization
             }
-
-            return result
         }
 
         do {

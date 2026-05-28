@@ -29,13 +29,13 @@ class Notifications {
     func parking(_ parking: ParkingResponse, visitors: [Visitor]?) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         for parking in parking.active {
-            try? scheduleReminders(parking, visitors: visitors)
-            try? scheduleEnd(parking, visitors: visitors)
+            do { try scheduleReminders(parking, visitors: visitors) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleEnd(parking, visitors: visitors) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
         }
         for parking in parking.scheduled {
-            try? scheduleStart(parking, visitors: visitors)
-            try? scheduleEnd(parking, visitors: visitors)
-            try? scheduleReminders(parking, visitors: visitors)
+            do { try scheduleStart(parking, visitors: visitors) } catch { Log.error("scheduleStart failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleEnd(parking, visitors: visitors) } catch { Log.error("scheduleEnd failed for parking \(parking.id): \(error.localizedDescription)") }
+            do { try scheduleReminders(parking, visitors: visitors) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }
         }
     }
 

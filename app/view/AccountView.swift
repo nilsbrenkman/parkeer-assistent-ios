@@ -60,22 +60,24 @@ struct AccountView: View {
     }
     
     private func load() {
-        do {
-            _ = try app.loadAccounts()
-        } catch {
-            switch error {
-            case AuthenticationError.Unavailable:
+        Task {
+            do {
+                try await app.loadAccounts()
+            } catch AuthenticationError.Unavailable {
                 MessageManager.instance.addMessage(Lang.Account.errorUnavailable.localized(), type: Type.ERROR)
-                break
-            case AuthenticationError.Failed:
+                presentationMode.wrappedValue.dismiss()
+                return
+            } catch AuthenticationError.Failed {
                 MessageManager.instance.addMessage(Lang.Account.errorFailed.localized(), type: Type.WARN)
-                break
-            default:
-                break
+                presentationMode.wrappedValue.dismiss()
+                return
+            } catch {
+                Log.error("loadAccounts failed: \(error.localizedDescription)")
+                presentationMode.wrappedValue.dismiss()
+                return
             }
-            presentationMode.wrappedValue.dismiss()
+            autoLogin = Keychain.autoLogin()
         }
-        autoLogin = Keychain.autoLogin()
     }
 }
 

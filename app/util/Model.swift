@@ -135,7 +135,14 @@ struct History: Codable, Hashable {
     var endTime: String
     var cost: Double
 
-    var date: Date { try! Util.parseDate(startTime) }
+    var date: Date {
+        do {
+            return try Util.parseDate(startTime)
+        } catch {
+            Log.warning("History.date: could not parse startTime '\(startTime)'")
+            return Date.distantPast
+        }
+    }
 }
 
 struct Regime: Codable {

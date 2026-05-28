@@ -119,34 +119,35 @@ struct LoginView: View {
     }
 
     private func authenticate() {
-        do {
-            try app.loadAccounts()
-        } catch {
-            switch error {
-            case AuthenticationError.Unavailable:
+        Task {
+            do {
+                try await app.loadAccounts()
+            } catch AuthenticationError.Unavailable {
                 canAuthenticate = false
-                break
-            case AuthenticationError.Failed:
+                username = ""
+                password = ""
+                return
+            } catch AuthenticationError.Failed {
                 authenticationFailed = true
-                break
-            default:
-                break
+                username = ""
+                password = ""
+                return
+            } catch {
+                Log.error("loadAccounts failed: \(error.localizedDescription)")
+                username = ""
+                password = ""
+                return
             }
-            username = ""
-            password = ""
-            return
-        }
-        
-        if let account = app.activeAccount {
-            if username.isEmpty {
+
+            if let account = app.activeAccount, username.isEmpty {
                 username = account.username
                 password = account.password
             }
-        }
 
-        if app.autoLogin && Keychain.autoLogin() {
-            app.autoLogin = false
-            startLogin()
+            if app.autoLogin && Keychain.autoLogin() {
+                app.autoLogin = false
+                startLogin()
+            }
         }
     }
 
