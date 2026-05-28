@@ -1,0 +1,71 @@
+{
+  "": {
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/master.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/Constants.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Constants.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Constants.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Constants~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Constants.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/License.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/License.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/License.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/License~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/License.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/Model.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Model.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Model.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Model~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Model.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/Util.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Util.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Util.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Util~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/Util.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/ApiClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ApiClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ApiClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ApiClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ApiClient.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/ClientManager.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ClientManager.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ClientManager.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ClientManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ClientManager.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/LoginClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/LoginClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/LoginClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/LoginClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/LoginClient.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/ParkingClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ParkingClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ParkingClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ParkingClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/ParkingClient.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/PaymentClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/PaymentClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/PaymentClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/PaymentClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/PaymentClient.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/UserClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/UserClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/UserClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/UserClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/UserClient.swiftdeps"
+  },
+  "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/Sources/ParkeerAssistent/client/VisitorClient.swift": {
+    "dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/VisitorClient.d",
+    "object": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/VisitorClient.swift.o",
+    "swiftmodule": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/VisitorClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/client/VisitorClient.swiftdeps"
+  }
+}

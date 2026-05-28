@@ -1,0 +1,4 @@
+module ParkeerAssistent {
+    header "/Users/nils/Projects/ParkeerAssistent/ios/ParkeerAssistent/.build/x86_64-apple-macosx/debug/ParkeerAssistent.build/ParkeerAssistent-Swift.h"
+    requires objc
+}

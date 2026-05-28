@@ -1,0 +1,90 @@
+//
+//  AccountDetailView.swift
+//  app
+//
+//  Created by Nils Brenkman on 09/12/2023.
+//
+
+import SwiftUI
+
+struct AccountDetailView: View {
+
+    @EnvironmentObject var app: AppModel
+
+    var account: Credentials
+
+    @State private var alias: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+
+    var body: some View {
+        Form {
+            Section {
+                HStack {
+                    Text(Lang.Account.alias.localized())
+                        .frame(alignment: .leading)
+                    TextField(Lang.Account.alias.localized(), text: $alias)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding(.vertical, Constants.padding.mini)
+
+                HStack {
+                    Text(Lang.Login.username.localized())
+                        .frame(alignment: .leading)
+                    TextField(Lang.Login.username.localized(), text: $username)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding(.vertical, Constants.padding.mini)
+
+                HStack {
+                    Text(Lang.Login.password.localized())
+                        .frame(alignment: .leading)
+                    TextField(Lang.Login.password.localized(), text: $password)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding(.vertical, Constants.padding.mini)
+            }
+            Section {
+                Button(action: save) {
+                    Text(Lang.Common.save.localized())
+                        .font(.title3)
+                        .bold()
+                        .centered()
+                }
+                .style(.success, disabled: false)
+            }
+        }
+        .onAppear {
+            alias = account.alias ?? ""
+            username = account.username
+            password = account.password
+        }
+        .pageTitle(
+            account.username.isEmpty
+                ? Lang.Account.newAccount.localized()
+                : Lang.Account.details.localized(),
+            dismiss: app.popScreen
+        )
+    }
+
+    private func save() {
+        if account.username.isEmpty {
+            app.addAccount(username: username, password: password, alias: alias)
+        } else {
+            app.updateAccount(account, username: username, password: password, alias: alias)
+        }
+        app.popScreen()
+    }
+
+}
+
+// #Preview {
+//    @State var credentials = Credentials(alias: "alias", username: "user", password: "1234")
+//    AccountDetailView(account: $credentials).pr
+// }
