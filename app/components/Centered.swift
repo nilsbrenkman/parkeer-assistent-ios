@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Centered: ViewModifier {
-    
+
     func body(content: Content) -> some View {
         HStack {
             Spacer()
@@ -16,11 +16,11 @@ struct Centered: ViewModifier {
             Spacer()
         }
     }
-    
+
 }
 
 extension View {
     func centered() -> some View {
-        self.modifier(Centered())
+        modifier(Centered())
     }
 }

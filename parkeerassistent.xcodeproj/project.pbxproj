@@ -257,6 +257,8 @@
 				29CCB0CD27459C3A00504164 /* HistoryRowView.swift */,
 				29CCB0C927445DAA00504164 /* HistoryView.swift */,
 				29D4F72E26B89D2700600D33 /* InfoView.swift */,
+				298F7D852682639300D75A5C /* LicenseView.swift */,
+				292A1D09267D53F700F14A59 /* LoadingView.swift */,
 				29B827E8267564420025E717 /* LoginView.swift */,
 				29F7B14B2690C14F0079EF92 /* MessageView.swift */,
 				29F7B1452690AD570079EF92 /* ParkingDetailView.swift */,
@@ -277,11 +279,29 @@
 			isa = PBXGroup;
 			children = (
 				29939680271F6DA800B1AB57 /* AppMessenger.swift */,
+				299395B4271B1DC100B1AB57 /* AppModel.swift */,
+				299395B3271B1DC100B1AB57 /* Messenger.swift */,
+				299395B6271B1DC100B1AB57 /* UserModel.swift */,
 			);
 			path = state;
 			sourceTree = "<group>";
 		};
-		299395DB271B479E00B1AB57 /* common */ = {
+		299395E7271B4B0300B1AB57 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				299395E9271B4B0300B1AB57 /* ApiClient.swift */,
+				299395ED271B4B0300B1AB57 /* ClientManager.swift */,
+				29600FC62EC32A1400BD4725 /* GeoClient.swift */,
+				299395EC271B4B0300B1AB57 /* LoginClient.swift */,
+				299395EB271B4B0300B1AB57 /* ParkingClient.swift */,
+				299395EA271B4B0300B1AB57 /* PaymentClient.swift */,
+				299395E8271B4B0300B1AB57 /* UserClient.swift */,
+				299395EE271B4B0300B1AB57 /* VisitorClient.swift */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		29AF773F2FC8575900BFF3FA /* util */ = {
 			isa = PBXGroup;
 			children = (
 				29F7B14D269101CC0079EF92 /* Keychain.swift */,
@@ -291,79 +311,17 @@
 				29F7B15A269CD68F0079EF92 /* Notifications.swift */,
 				29E0B8BE26E3ADBD002450B7 /* Stats.swift */,
 				299395DE271B4A9700B1AB57 /* Util.swift */,
-				299395E7271B4B0300B1AB57 /* client */,
-				299395DC271B47F000B1AB57 /* components */,
-				2993965B271B4E6100B1AB57 /* state */,
-				299395DD271B484500B1AB57 /* ui */,
-				299395FD271B4B5F00B1AB57 /* view */,
-				299395FE271B4C9700B1AB57 /* Assets.xcassets */,
-				29AD3C0026D572470082E913 /* Language.strings */,
 			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		299395DC271B47F000B1AB57 /* components */ = {
-			isa = PBXGroup;
-			children = (
-				29D4F73726B9BAAE00600D33 /* Centered.swift */,
-			);
-			path = components;
-			sourceTree = "<group>";
-		};
-		299395DD271B484500B1AB57 /* ui */ = {
-			isa = PBXGroup;
-			children = (
-				29D4F74026B9D2EB00600D33 /* Color.swift */,
-				290B2316268BFE6800266920 /* Constants.swift */,
-				298632A026CBEBCE00990215 /* Font.swift */,
-				29AD3C0426D57A9C0082E913 /* Lang.swift */,
-				295E91C427BEF55000A1929E /* Preview.swift */,
-			);
-			path = ui;
-			sourceTree = "<group>";
-		};
-		299395E7271B4B0300B1AB57 /* client */ = {
-			isa = PBXGroup;
-			children = (
-				299395E9271B4B0300B1AB57 /* ApiClient.swift */,
-				299395ED271B4B0300B1AB57 /* ClientManager.swift */,
-				299395EC271B4B0300B1AB57 /* LoginClient.swift */,
-				29600FC62EC32A1400BD4725 /* GeoClient.swift */,
-				299395EB271B4B0300B1AB57 /* ParkingClient.swift */,
-				299395EA271B4B0300B1AB57 /* PaymentClient.swift */,
-				299395E8271B4B0300B1AB57 /* UserClient.swift */,
-				299395EE271B4B0300B1AB57 /* VisitorClient.swift */,
-			);
-			path = client;
-			sourceTree = "<group>";
-		};
-		299395FD271B4B5F00B1AB57 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				298F7D852682639300D75A5C /* LicenseView.swift */,
-				292A1D09267D53F700F14A59 /* LoadingView.swift */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		2993965B271B4E6100B1AB57 /* state */ = {
-			isa = PBXGroup;
-			children = (
-				299395B3271B1DC100B1AB57 /* Messenger.swift */,
-				299395B4271B1DC100B1AB57 /* AppModel.swift */,
-				299395B6271B1DC100B1AB57 /* UserModel.swift */,
-			);
-			path = state;
+			path = util;
 			sourceTree = "<group>";
 		};
 		29B827AB26755F820025E717 = {
 			isa = PBXGroup;
 			children = (
-				299395DB271B479E00B1AB57 /* common */,
+				292FD7BF2A19717800C6A088 /* app.xctestplan */,
 				29B827B626755F820025E717 /* app */,
 				29B827C826755F840025E717 /* appTests */,
 				29B827D326755F840025E717 /* appUITests */,
-				292FD7BF2A19717800C6A088 /* app.xctestplan */,
 				29B827B526755F820025E717 /* Products */,
 				2980F99426DABF7300D49E00 /* Frameworks */,
 				29129D03271786FD00329C35 /* Recovered References */,
@@ -386,13 +344,17 @@
 			children = (
 				29B827B726755F820025E717 /* parkeerassistentApp.swift */,
 				29F7B15C26AF71010079EF92 /* AppDelegate.swift */,
+				299395E7271B4B0300B1AB57 /* client */,
 				29D4F73026B9AF4500600D33 /* components */,
 				29688E6426B08318008BC85A /* resources */,
 				299395B2271B1DC100B1AB57 /* state */,
 				29D4F73F26B9D2AD00600D33 /* ui */,
+				29AF773F2FC8575900BFF3FA /* util */,
 				298F7D7E2682558800D75A5C /* view */,
-				29B827C026755F840025E717 /* Info.plist */,
 				29D8BC4C27D97E7000FA4F79 /* app.entitlements */,
+				299395FE271B4C9700B1AB57 /* Assets.xcassets */,
+				29B827C026755F840025E717 /* Info.plist */,
+				29AD3C0026D572470082E913 /* Language.strings */,
 				29688E7126B1C729008BC85A /* Launch Screen.storyboard */,
 				29B827BD26755F840025E717 /* Preview Content */,
 			);
@@ -437,6 +399,7 @@
 				29D4F73B26B9BBCE00600D33 /* ButtonWait.swift */,
 				29CCB0CB274478E300504164 /* CalendarDate.swift */,
 				295898332A17BF71000FDA59 /* CalendarView.swift */,
+				29D4F73726B9BAAE00600D33 /* Centered.swift */,
 				291988C1268B4F1E00B289F0 /* DataBox.swift */,
 				29D4F73526B9B91A00600D33 /* DatePickerModal.swift */,
 				29AD3BF126CF42B10082E913 /* InsetPicker.swift */,
@@ -453,6 +416,11 @@
 			isa = PBXGroup;
 			children = (
 				29D4F74426B9E07000600D33 /* Button.swift */,
+				29D4F74026B9D2EB00600D33 /* Color.swift */,
+				290B2316268BFE6800266920 /* Constants.swift */,
+				298632A026CBEBCE00990215 /* Font.swift */,
+				29AD3C0426D57A9C0082E913 /* Lang.swift */,
+				295E91C427BEF55000A1929E /* Preview.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -523,20 +491,6 @@
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
-					29939602271B4D2200B1AB57 = {
-						CreatedOnToolsVersion = 13.0;
-					};
-					2993960A271B4D2500B1AB57 = {
-						CreatedOnToolsVersion = 13.0;
-					};
-					29939624271B4D2800B1AB57 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 2993960A271B4D2500B1AB57;
-					};
-					2993962E271B4D2800B1AB57 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 29939602271B4D2200B1AB57;
-					};
 					29B827B326755F820025E717 = {
 						CreatedOnToolsVersion = 12.4;
 					};
