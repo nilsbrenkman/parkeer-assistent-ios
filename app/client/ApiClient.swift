@@ -19,6 +19,9 @@ class ApiClient {
     private let session: URLSession
     private let url: URL
     private var cookies: SessionCookies
+    
+    private let encoder: JSONEncoder = JSONEncoder()
+    private let decoder: JSONDecoder = JSONDecoder()
 
     weak var errorHandler: ErrorHandler?
 
@@ -58,7 +61,7 @@ class ApiClient {
         body: REQUEST? = nil
     ) async throws -> RESPONSE {
 
-        let httpTask = Task.detached(priority: .userInitiated) { [path, method, body] in
+        let httpTask = Task { [path, method, body] in
 
             guard let url = URL(string: self.baseUrl + path) else {
                 throw ClientError.InvalidPath
@@ -75,7 +78,7 @@ class ApiClient {
             if body != nil {
                 let json: Data
                 do {
-                    json = try JSONEncoder().encode(body)
+                    json = try encoder.encode(body)
                 } catch {
                     Log.error("Request body encoding failed for \(url): \(error.localizedDescription)")
                     throw ClientError.RequestSerialization
@@ -108,7 +111,7 @@ class ApiClient {
             Log.debug("Response: \(String(decoding: data, as: UTF8.self))")
 
             do {
-                return try JSONDecoder().decode(RESPONSE.self, from: data)
+                return try decoder.decode(RESPONSE.self, from: data)
             } catch {
                 Log.error("Response decoding failed for \(url): \(error.localizedDescription)")
                 throw ClientError.ResponseSerialization
@@ -139,7 +142,7 @@ class ApiClient {
             )
         }
 
-        guard let data = try? JSONEncoder().encode(PersistCookies(cookies: persistCookies)),
+        guard let data = try? encoder.encode(PersistCookies(cookies: persistCookies)),
             let json = String(data: data, encoding: .utf8)
         else {
             print("Unable to serialize cookies")
@@ -150,7 +153,7 @@ class ApiClient {
 
     public func setCookies(_ cookies: String) {
         if let data = cookies.data(using: .utf8),
-            let persistCookies = try? JSONDecoder().decode(PersistCookies.self, from: data)
+           let persistCookies = try? decoder.decode(PersistCookies.self, from: data)
         {
 
             for persistCookie in persistCookies.cookies {

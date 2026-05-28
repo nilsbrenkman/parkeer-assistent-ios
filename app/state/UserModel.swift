@@ -43,8 +43,8 @@ class UserModel: ObservableObject {
     let paymentClient: PaymentClient
     
     init() throws {
-        loginClient = try ClientManager.instance.get(LoginClient.self)
-        userClient = try ClientManager.instance.get(UserClient.self)
+        loginClient   = try ClientManager.instance.get(LoginClient.self)
+        userClient    = try ClientManager.instance.get(UserClient.self)
         parkingClient = try ClientManager.instance.get(ParkingClient.self)
         visitorClient = try ClientManager.instance.get(VisitorClient.self)
         paymentClient = try ClientManager.instance.get(PaymentClient.self)

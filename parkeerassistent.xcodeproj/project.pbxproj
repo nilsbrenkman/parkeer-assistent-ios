@@ -318,8 +318,8 @@
 		29B827AB26755F820025E717 = {
 			isa = PBXGroup;
 			children = (
-				292FD7BF2A19717800C6A088 /* app.xctestplan */,
 				29B827B626755F820025E717 /* app */,
+				292FD7BF2A19717800C6A088 /* app.xctestplan */,
 				29B827C826755F840025E717 /* appTests */,
 				29B827D326755F840025E717 /* appUITests */,
 				29B827B526755F820025E717 /* Products */,
