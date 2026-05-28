@@ -34,7 +34,6 @@ struct ParkingView: View {
                     .centered()
             }
         }
-        .id(UUID())
 
     }
 

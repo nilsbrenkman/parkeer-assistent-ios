@@ -28,8 +28,6 @@ struct HistoryRowView: View {
     }
 }
 
-struct HistoryRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryRowView(history: History(id: 0, license: "", startTime: "", endTime: "", cost: 0))
-    }
+#Preview {
+    HistoryRowView(history: History(id: 0, license: "", startTime: "", endTime: "", cost: 0))
 }

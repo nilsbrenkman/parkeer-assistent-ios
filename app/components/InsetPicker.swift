@@ -40,9 +40,7 @@ struct InsetPicker: View {
     }
 }
 
-struct PickerModal_Previews: PreviewProvider {
-    @State static var selected = 0
-    static var previews: some View {
-        InsetPicker(labels: [""], selected: $selected)
-    }
+#Preview {
+    @Previewable @State var selected = 0
+    InsetPicker(labels: [""], selected: $selected)
 }

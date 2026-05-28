@@ -79,7 +79,7 @@ class Notifications {
 
     func subtitle(_ parking: Parking, visitors: [Visitor]?) throws -> String {
         guard let visitor = Util.getVisitor(parking, visitors: visitors) else {
-            print("Can not find visitor")
+            Log.warning("Notifications.subtitle: visitor not found for parking \(parking.id) license '\(parking.license)'")
             throw GenericError.VisitorNotFound
         }
         let license = License.formatLicense(visitor.license)
@@ -116,7 +116,7 @@ class Notifications {
             if success {
                 self.authorised = true
             } else if let error = error {
-                print(error.localizedDescription)
+                Log.error("Notifications authorization failed: \(error.localizedDescription)")
             }
         }
     }

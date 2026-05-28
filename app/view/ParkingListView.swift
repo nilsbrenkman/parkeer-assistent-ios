@@ -38,8 +38,7 @@ struct ParkingListView: View {
 
 }
 
-struct ParkingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ParkingListView(title: "Actief", parkingList: [])
-    }
+#Preview {
+    ParkingListView(title: "Actief", parkingList: [])
+        .setupPreview()
 }

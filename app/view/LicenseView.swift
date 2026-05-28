@@ -37,9 +37,7 @@ struct LicenseView: View {
     }
 }
 
-struct LicenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        LicenseView(license: "12tbd1")
-        LicenseView(license: "wwwwww")
-    }
+#Preview {
+    LicenseView(license: "12tbd1")
 }
+

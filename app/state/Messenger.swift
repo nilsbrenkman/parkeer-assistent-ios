@@ -24,7 +24,7 @@ class MessageManager {
 
     func addMessage(_ message: String?, type: Type, ok: (() -> Void)? = nil) {
         guard let message = message else {
-            print("Message is nil")
+            Log.warning("MessageManager.addMessage called with nil message")
             return
         }
         messenger?.addMessage(message: message, type: type, ok: ok)

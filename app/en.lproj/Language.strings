@@ -63,6 +63,7 @@
 "parking.noHistory" = "No parking history found";
 "parking.freeParking" = "You can park for free today";
 "parking.sign" = "Sign";
+"parking.invalidZone" = "Invalid zone";
 
 "payment.amount" = "Amount";
 "payment.bank" = "Payment method";

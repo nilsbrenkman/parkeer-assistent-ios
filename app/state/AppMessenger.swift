@@ -16,9 +16,9 @@ class AppMessenger: ObservableObject, Messenger {
     }
 
     func addMessage(message: String, type: Type, ok: (() -> Void)? = nil) {
-        Task {
+        Task { [weak self] in
             await MainActor.run {
-                self.message = Message(message: message, type: type, ok: ok)
+                self?.message = Message(message: message, type: type, ok: ok)
             }
         }
     }

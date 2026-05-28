@@ -27,8 +27,6 @@ struct CalendarDate: View {
 
 }
 
-struct CalendarDate_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarDate(date: Date())
-    }
+#Preview {
+    CalendarDate(date: Date())
 }

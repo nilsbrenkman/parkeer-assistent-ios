@@ -27,7 +27,10 @@ class ApiClient {
 
     private init() {
         baseUrl = Util.getSetting("ServerBaseURL")
-        session = URLSession(configuration: .default)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForResource = 60
+        session = URLSession(configuration: config)
         guard let url = URL(string: baseUrl) else {
             fatalError("ServerBaseURL is not a valid URL: \(baseUrl)")
         }
@@ -145,7 +148,7 @@ class ApiClient {
         guard let data = try? encoder.encode(PersistCookies(cookies: persistCookies)),
             let json = String(data: data, encoding: .utf8)
         else {
-            print("Unable to serialize cookies")
+            Log.error("Unable to serialize cookies for persistence")
             return
         }
         UserDefaults.standard.set(json, forKey: ApiClient.COOKIE_KEY)
@@ -184,7 +187,7 @@ class ApiClient {
             }
             return false
         default:
-            print("Ignoring cookie \(cookie.name)")
+            Log.debug("Ignoring cookie \(cookie.name)")
         }
         return false
     }

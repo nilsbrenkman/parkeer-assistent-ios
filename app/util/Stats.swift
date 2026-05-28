@@ -11,17 +11,19 @@ import StoreKit
 struct Stats: Codable {
 
     private static let STATS_KEY = "userStats"
+    private static let encoder = JSONEncoder()
+    private static let decoder = JSONDecoder()
 
     public static var user: Stats {
         get {
             if let data = UserDefaults.standard.data(forKey: Stats.STATS_KEY),
-               let stats = try? JSONDecoder().decode(Stats.self, from: data) {
+               let stats = try? Stats.decoder.decode(Stats.self, from: data) {
                 return stats
             }
             return Stats(firstLogin: Date.now(), loginCount: 0, visitorCount: 0, parkingCount: 0, paymentCount: 0)
         }
         set {
-            if let data = try? JSONEncoder().encode(newValue) {
+            if let data = try? Stats.encoder.encode(newValue) {
                 UserDefaults.standard.set(data, forKey: Stats.STATS_KEY)
             }
         }

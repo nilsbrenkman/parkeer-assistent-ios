@@ -141,8 +141,6 @@ class AppModel: ObservableObject, ErrorHandler {
     }
     
     func logout() async {
-        isLoading = true
-        
         do {
             let response = try await loginClient.logout()
             if !response.success {

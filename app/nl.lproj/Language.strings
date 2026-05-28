@@ -63,6 +63,7 @@
 "parking.noHistory" = "Geen parkeer geschiedenis gevonden";
 "parking.freeParking" = "U kan in vandaag gratis parkeren";
 "parking.sign" = "Bord";
+"parking.invalidZone" = "Ongeldige zone";
 
 "payment.amount" = "Bedrag";
 "payment.bank" = "Betaalmethode";

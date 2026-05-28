@@ -25,9 +25,7 @@ struct VisitorView: View {
     }
 }
 
-struct VisitorView_Previews: PreviewProvider {
-    static var previews: some View {
-        let visitor = Visitor(id: 1, license: "12AB34", formattedLicense: "12-AB-34", name: "Jan")
-        VisitorView(visitor: visitor)
-    }
+#Preview {
+    let visitor = Visitor(id: 1, license: "12AB34", formattedLicense: "12-AB-34", name: "Jan")
+    VisitorView(visitor: visitor)
 }

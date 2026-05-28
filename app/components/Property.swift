@@ -24,8 +24,6 @@ struct Property: View {
     }
 }
 
-struct Property_Previews: PreviewProvider {
-    static var previews: some View {
-        Property(label: "Label", text: "Value / text")
-    }
+#Preview {
+    Property(label: "Label", text: "Value / text")
 }

@@ -24,7 +24,7 @@ class Util {
 
     static func parseDate(_ date: String) throws -> Date {
         guard let date = Util.dateTimeFormatter.date(from: date) else {
-            print("Could not parse date")
+            Log.warning("Could not parse date: \(date)")
             throw GenericError.InvalidDate
         }
         return date
@@ -51,7 +51,7 @@ class Util {
 
     static func getParkingTime(_ time: String) -> String {
         guard let date = Util.dateTimeFormatter.date(from: time) else {
-            print("Could not parse date")
+            Log.warning("getParkingTime: could not parse '\(time)'")
             return ""
         }
         return parkingFormatter.string(from: date)

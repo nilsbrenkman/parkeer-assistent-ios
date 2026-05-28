@@ -21,10 +21,17 @@ class GeoClientApi: GeoClient {
     }
 
     func parkingMeters(location: CLLocationCoordinate2D) async throws -> [ParkingMeter] {
+        var components = URLComponents()
+        components.path = "geo/parking-meters/nearby"
+        components.queryItems = [
+            URLQueryItem(name: "lat", value: String(location.latitude)),
+            URLQueryItem(name: "lon", value: String(location.longitude)),
+        ]
+        let path = components.string ?? "geo/parking-meters/nearby"
         return try await ApiClient.client
             .call(
                 [ParkingMeter].self,
-                path: "geo/parking-meters/nearby?lat=\(location.latitude)&lon=\(location.longitude)",
+                path: path,
                 method: Method.GET
             )
     }

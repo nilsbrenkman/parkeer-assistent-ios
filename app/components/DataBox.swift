@@ -34,8 +34,6 @@ struct DataBox: View {
     }
 }
 
-struct DataBox_Previews: PreviewProvider {
-    static var previews: some View {
-        DataBox(title: "Title", content: "12.34")
-    }
+#Preview {
+    DataBox(title: "Title", content: "12.34")
 }

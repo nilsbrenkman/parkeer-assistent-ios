@@ -41,11 +41,9 @@ struct DatePickerModal: View {
 
 }
 
-struct DatePickerModal_Previews: PreviewProvider {
-    @State private static var date = Date()
-    static var previews: some View {
-        DatePickerModal(date: $date, delegate: CalenderViewDelegate())
-    }
+#Preview {
+    @Previewable @State var date = Date()
+    DatePickerModal(date: $date, delegate: CalenderViewDelegate())
 }
 
 public class CalenderViewDelegate: NSObject, UICalendarSelectionSingleDateDelegate {

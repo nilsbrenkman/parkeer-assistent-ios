@@ -91,8 +91,7 @@ struct AddVisitorView: View {
     
 }
 
-struct AddVisitorView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddVisitorView()
-    }
+#Preview {
+    AddVisitorView()
+        .setupPreview()
 }

@@ -119,13 +119,11 @@ struct Config {
     var size: CGFloat
 }
 
-struct WheelSelector_Previews: PreviewProvider {
-    static var previews: some View {
-        WheelSelector(config: Config(
-            radius: 50,
-            size: 12
-        ), onChange: { _ in
-            //
-        })
-    }
+#Preview {
+    WheelSelector(config: Config(
+        radius: 50,
+        size: 12
+    ), onChange: { _ in
+        //
+    })
 }

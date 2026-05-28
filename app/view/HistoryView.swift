@@ -34,8 +34,7 @@ struct HistoryView: View {
     }
 }
 
-struct HistoryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView(history: History(id: 0, license: "", startTime: "", endTime: "", cost: 0))
-    }
+#Preview {
+    HistoryView(history: History(id: 0, license: "", startTime: "", endTime: "", cost: 0))
+        .setupPreview()
 }

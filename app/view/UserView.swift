@@ -71,7 +71,7 @@ struct UserView: View {
         guard refreshTask == nil else {
             return
         }
-        refreshTask = Task.detached(priority: .background) {
+        refreshTask = Task {
             Log.info("Starting refresh task")
 
             let checkUpdate: (String) -> Double = { time in
@@ -116,8 +116,7 @@ struct UserView: View {
 
 }
 
-struct UserView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserView()
-    }
+#Preview {
+    UserView()
+        .setupPreview()
 }

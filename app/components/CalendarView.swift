@@ -32,12 +32,11 @@ struct CalendarView: UIViewRepresentable {
 
 }
 
-struct CalendarView_Previews: PreviewProvider {
-    static var previews: some View {
-        if #available(iOS 16.0, *) {
-//            CalendarView()
-        } else {
-            EmptyView()
-        }
+#Preview {
+    if #available(iOS 16.0, *) {
+//        CalendarView()
+        EmptyView()
+    } else {
+        EmptyView()
     }
 }

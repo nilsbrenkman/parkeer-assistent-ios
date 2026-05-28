@@ -104,8 +104,7 @@ struct HistoryGroup {
     var history: [History]
 }
 
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryListView()
-    }
+#Preview {
+    HistoryListView()
+        .setupPreview()
 }

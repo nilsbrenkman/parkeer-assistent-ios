@@ -192,7 +192,7 @@ class UserModel: ObservableObject {
                 response = try await userClient.regime(parkingMeterId: parkingMeterId)
             } catch {
                 Log.error("setParkingMeter regime fetch failed: \(error.localizedDescription)")
-                MessageManager.instance.addMessage("Invalid zone", type: Type.ERROR)
+                MessageManager.instance.addMessage(Lang.Parking.invalidZone.localized(), type: Type.ERROR)
                 return
             }
             self.hourRate = response.hourRate
