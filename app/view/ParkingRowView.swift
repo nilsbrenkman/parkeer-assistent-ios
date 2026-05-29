@@ -30,9 +30,11 @@ struct ParkingRowView: View {
 
 }
 
+#if DEBUG
 #Preview {
     ParkingRowView(
         parking: Parking(id: 0, license: "12-AB-CD", startTime: "", endTime: "", cost: 12.34)
     )
     .setupPreview()
 }
+#endif

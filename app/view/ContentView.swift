@@ -101,7 +101,9 @@ private struct RootState: Equatable {
     let isBackground: Bool
 }
 
+#if DEBUG
 #Preview {
     ContentView()
         .setupPreview(loggedIn: true)
 }
+#endif

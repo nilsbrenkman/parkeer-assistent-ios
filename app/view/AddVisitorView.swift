@@ -91,7 +91,9 @@ struct AddVisitorView: View {
     
 }
 
+#if DEBUG
 #Preview {
     AddVisitorView()
         .setupPreview()
 }
+#endif

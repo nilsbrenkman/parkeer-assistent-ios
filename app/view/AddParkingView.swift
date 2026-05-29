@@ -241,8 +241,9 @@ struct AddParkingView: View {
     
 }
 
+#if DEBUG
 #Preview {
     AddParkingView(visitor: Visitor(id: 1, license: "123ABC", formattedLicense: "123-A-BC", name: "John Doe"))
         .setupPreview()
 }
-
+#endif

@@ -39,7 +39,9 @@ struct ParkingListView: View {
 
 }
 
+#if DEBUG
 #Preview {
     ParkingListView(title: "Actief", parkingList: [])
         .setupPreview()
 }
+#endif

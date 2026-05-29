@@ -34,7 +34,9 @@ struct HistoryView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     HistoryView(history: History(id: 0, license: "", startTime: "", endTime: "", cost: 0))
         .setupPreview()
 }
+#endif

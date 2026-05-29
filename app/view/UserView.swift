@@ -101,7 +101,9 @@ struct UserView: View {
 
 }
 
+#if DEBUG
 #Preview {
     UserView()
         .setupPreview()
 }
+#endif

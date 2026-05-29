@@ -77,7 +77,9 @@ struct VisitorListView: View {
 
 }
 
+#if DEBUG
 #Preview {
     VisitorListView()
         .setupPreview()
 }
+#endif

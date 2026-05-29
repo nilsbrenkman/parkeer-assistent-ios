@@ -160,7 +160,9 @@ struct LoginView: View {
 
 }
 
+#if DEBUG
 #Preview {
     LoginView()
         .setupPreview()
 }
+#endif

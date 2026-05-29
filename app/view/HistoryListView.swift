@@ -95,7 +95,9 @@ struct HistoryGroup {
     var history: [History]
 }
 
+#if DEBUG
 #Preview {
     HistoryListView()
         .setupPreview()
 }
+#endif

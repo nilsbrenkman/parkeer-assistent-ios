@@ -133,12 +133,14 @@ struct PaymentView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .pageTitle(Lang.Payment.amount.localized(), dismiss: router.popScreen)
+        .pageTitle(Lang.Payment.start.localized(), dismiss: router.popScreen)
     }
 
 }
 
+#if DEBUG
 #Preview {
     PaymentView()
         .setupPreview()
 }
+#endif

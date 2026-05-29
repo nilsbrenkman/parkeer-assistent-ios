@@ -115,7 +115,9 @@ struct HeaderView: View {
     
 }
 
+#if DEBUG
 #Preview {
     HeaderView(loggedIn: true)
         .setupPreview()
 }
+#endif
