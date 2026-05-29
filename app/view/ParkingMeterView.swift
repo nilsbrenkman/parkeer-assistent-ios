@@ -18,8 +18,7 @@ struct ParkingMeterView: View {
     @State private var isAppearing: Bool = true
 
     private let locationManager = CLLocationManager()
-    private let geoClient = try? ClientManager.instance.get(GeoClient.self)
-    
+
     var body: some View {
         Map(position: $parkingMeter.position, bounds: .amsterdam, interactionModes: [.pan, .zoom, .rotate]) {
             UserAnnotation()
@@ -53,7 +52,7 @@ struct ParkingMeterView: View {
             }
             parkingMeter.lastLocation = center
             Task {
-                parkingMeter.parkingMeters = try await self.geoClient?.parkingMeters(location: center) ?? []
+                await parkingMeter.fetchNearby(center)
             }
         }
         .mapControls {

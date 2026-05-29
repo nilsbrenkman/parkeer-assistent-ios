@@ -18,33 +18,26 @@ class SessionStore: ObservableObject, ErrorHandler {
     public var autoLogin: Bool = true
     
     let loginClient: LoginClient
-        
-    init() {
-        do {
-            loginClient = try ClientManager.instance.get(LoginClient.self)
-            ApiClient.client.registerErrorHandler(self)
-        } catch {
-            fatalError("Failed to initialize SessionStore: \(error)")
-        }
+
+    init(loginClient: LoginClient) {
+        self.loginClient = loginClient
+        ApiClient.client.registerErrorHandler(self)
     }
     
     nonisolated func handleError(_ error: ClientError) {
-        Task {
-            await MainActor.run {
-                switch error {
-                case .Unauthorized:
-                    if self.isLoggedIn {
-                        MessageStore.shared.addMessage(Lang.Error.unauthorized.localized(), type: Type.WARN)
-                    }
-                    
-                    self.clearUser()
-                case .NoHttpResponse:
-                    MessageStore.shared.addMessage(Lang.Error.serverUnknown.localized(), type: Type.ERROR)
-                case .ServerError(let message):
-                    MessageStore.shared.addMessage(message, type: Type.ERROR)
-                default:
-                    MessageStore.shared.addMessage(Lang.Error.serverUnknown.localized(), type: Type.ERROR)
+        Task { @MainActor in
+            switch error {
+            case .Unauthorized:
+                if self.isLoggedIn {
+                    MessageStore.shared.addMessage(Lang.Error.unauthorized.localized(), type: Type.WARN)
                 }
+                self.clearUser()
+            case .NoHttpResponse:
+                MessageStore.shared.addMessage(Lang.Error.serverUnknown.localized(), type: Type.ERROR)
+            case .ServerError(let message):
+                MessageStore.shared.addMessage(message, type: Type.ERROR)
+            default:
+                MessageStore.shared.addMessage(Lang.Error.serverUnknown.localized(), type: Type.ERROR)
             }
         }
     }

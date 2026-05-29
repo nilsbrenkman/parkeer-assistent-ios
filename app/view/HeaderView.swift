@@ -100,9 +100,11 @@ struct HeaderView: View {
                 Rectangle()
                     .frame(height: 1)
                     .border(Color.ui.header, width: 1)
+
             }
             
         }
+        .background(Color.ui.header)
     }
     
     private func logout() {
@@ -113,4 +115,7 @@ struct HeaderView: View {
     
 }
 
-
+#Preview {
+    HeaderView(loggedIn: true)
+        .setupPreview()
+}

@@ -75,27 +75,33 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: session.isLoggedIn) { onChangeRoot() }
-        .onChange(of: session.isLoading) { onChangeRoot() }
-        .onChange(of: session.isBackground) { onChangeRoot() }
-    }
-    
-    private func onChangeRoot() {
-        if session.isLoading || session.isBackground {
-            router.path = []
-        } else {
-            if session.isLoggedIn {
-                router.path = [Screen.user]
-            } else {
-                router.path = [Screen.login]
-                user.isLoaded = false
+        .onChange(of: rootState) { _, _ in
+            router.syncRoot(
+                isLoggedIn: session.isLoggedIn,
+                isLoading: session.isLoading,
+                isBackground: session.isBackground
+            )
+            if !session.isLoggedIn && !session.isLoading && !session.isBackground {
+                user.reset()
             }
         }
     }
-    
+
+    private var rootState: RootState {
+        RootState(isLoggedIn: session.isLoggedIn,
+                  isLoading: session.isLoading,
+                  isBackground: session.isBackground)
+    }
+
+}
+
+private struct RootState: Equatable {
+    let isLoggedIn: Bool
+    let isLoading: Bool
+    let isBackground: Bool
 }
 
 #Preview {
     ContentView()
-        .setupPreview()
+        .setupPreview(loggedIn: true)
 }

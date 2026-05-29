@@ -23,14 +23,23 @@ class UserStore: ObservableObject {
     
     @Published var isLoaded: Bool = false
     
-    let userClient:    UserClient
-    
-    init() {
-        do {
-            userClient = try ClientManager.instance.get(UserClient.self)
-        } catch {
-            fatalError("Failed to initialize UserStore: \(error)")
-        }
+    let userClient: UserClient
+
+    init(userClient: UserClient) {
+        self.userClient = userClient
+    }
+
+    func reset() {
+        balance = nil
+        hourRate = nil
+        timeBalance = 0
+        regimeTimeStart = nil
+        regimeTimeEnd = nil
+        regime = nil
+        productId = nil
+        zoneId = nil
+        parkingMeterId = nil
+        isLoaded = false
     }
     
     func getUser(_ onComplete: (() async -> Void)) async {

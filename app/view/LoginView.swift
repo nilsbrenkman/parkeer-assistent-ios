@@ -26,7 +26,8 @@ struct LoginView: View {
 
     var body: some View {
         Form {
-            Section(header: SectionHeader(Lang.Login.login.localized())) {
+            Section(header: SectionHeader(Lang.Login.login.localized())
+                                .padding(.top, Constants.padding.normal)) {
                 HStack {
                     Text(Lang.Login.username.localized())
                         .frame(alignment: .leading)
@@ -88,7 +89,6 @@ struct LoginView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .padding(.top, Constants.padding.normal)
         .onAppear(perform: authenticate)
         .onChange(of: scenePhase) { phase, initial in
             if phase == .background {

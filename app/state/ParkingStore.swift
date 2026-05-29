@@ -12,14 +12,20 @@ import SwiftUI
 class ParkingStore: ObservableObject {
     
     @Published var parking: ParkingResponse?
-        
+    @Published var history: [History]?
+
     let parkingClient: ParkingClient
-    
-    init() {
+
+    init(parkingClient: ParkingClient) {
+        self.parkingClient = parkingClient
+    }
+
+    func getHistory() async {
         do {
-            parkingClient = try ClientManager.instance.get(ParkingClient.self)
+            let response = try await parkingClient.history()
+            history = response.history
         } catch {
-            fatalError("Failed to initialize ParkingStore: \(error)")
+            Log.error("getHistory failed: \(error.localizedDescription)")
         }
     }
     
@@ -69,15 +75,13 @@ class ParkingStore: ObservableObject {
     }
     
     func stopParking(_ parking: Parking, user: UserStore) async {
-        self.parking = ParkingResponse(
-            active: Array(self.parking!.active.filter({ p in
-                p.id != parking.id
-            })),
-            scheduled: Array(self.parking!.scheduled.filter({ p in
-                p.id != parking.id
-            }))
-        )
-        
+        if let current = self.parking {
+            self.parking = ParkingResponse(
+                active: current.active.filter { $0.id != parking.id },
+                scheduled: current.scheduled.filter { $0.id != parking.id }
+            )
+        }
+
         let response: Response
         do {
             response = try await parkingClient.stop(parking)

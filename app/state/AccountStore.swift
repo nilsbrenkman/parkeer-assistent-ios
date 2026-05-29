@@ -61,6 +61,7 @@ class AccountStore: ObservableObject {
             try Keychain.storeCredentials(username: username, password: password, alias: alias)
         } catch {
             Log.error("addAccount Keychain store failed: \(error.localizedDescription)")
+            MessageStore.shared.addMessage(Lang.Account.saveFailed.localized(), type: .ERROR)
         }
         accounts = Keychain.retrieveCredentials()
     }
@@ -71,6 +72,7 @@ class AccountStore: ObservableObject {
             try Keychain.updateCredentials(account, username: username, password: password, alias: alias)
         } catch {
             Log.error("updateAccount Keychain update failed: \(error.localizedDescription)")
+            MessageStore.shared.addMessage(Lang.Account.saveFailed.localized(), type: .ERROR)
         }
         accounts = Keychain.retrieveCredentials()
         if isRecent {
@@ -84,6 +86,7 @@ class AccountStore: ObservableObject {
             try Keychain.deleteCredentials(account: account)
         } catch {
             Log.error("deleteAccount Keychain delete failed: \(error.localizedDescription)")
+            MessageStore.shared.addMessage(Lang.Account.deleteFailed.localized(), type: .ERROR)
         }
         accounts = Keychain.retrieveCredentials()
         if isRecent {

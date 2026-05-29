@@ -62,7 +62,9 @@ class Notifications {
         if !UserDefaults.standard.bool(forKey: Notifications.REMINDER_KEY) {
             return
         }
-        let interval = Notifications.INTERVAL_VALUES[Int(UserDefaults.standard.double(forKey: Notifications.INTERVAL_KEY))] * 60
+        let storedIndex = Int(UserDefaults.standard.double(forKey: Notifications.INTERVAL_KEY))
+        let clampedIndex = max(0, min(storedIndex, Notifications.INTERVAL_VALUES.count - 1))
+        let interval = Notifications.INTERVAL_VALUES[clampedIndex] * 60
 
         var reminder = try Util.parseDate(parking.startTime).addingTimeInterval(TimeInterval(interval))
         while reminder.timeIntervalSinceNow < 0 {

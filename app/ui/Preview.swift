@@ -8,29 +8,17 @@
 import SwiftUI
 
 #if DEBUG
-    private enum PreviewSetup {
-        static let registerClients: Void = {
-            ClientManager.instance.register(LoginClient.self, client: LoginClientApi.client)
-            ClientManager.instance.register(UserClient.self, client: UserClientApi.client)
-            ClientManager.instance.register(ParkingClient.self, client: ParkingClientApi.client)
-            ClientManager.instance.register(VisitorClient.self, client: VisitorClientApi.client)
-            ClientManager.instance.register(PaymentClient.self, client: PaymentClientApi.client)
-            ClientManager.instance.register(GeoClient.self, client: GeoClientApi.client)
-        }()
-    }
-
     extension View {
 
         @MainActor func setupPreview(loggedIn: Bool = false) -> some View {
-            _ = PreviewSetup.registerClients
-            let session = SessionStore()
+            let session = SessionStore(loginClient: LoginClientApi.client)
             session.isLoggedIn = loggedIn
             let accounts = AccountStore()
-            let user = UserStore()
-            let visitors = VisitorStore()
-            let parkings = ParkingStore()
-            let parkingMeter = ParkingMeterStore()
-            let payment = PaymentStore()
+            let user = UserStore(userClient: UserClientApi.client)
+            let visitors = VisitorStore(visitorClient: VisitorClientApi.client)
+            let parkings = ParkingStore(parkingClient: ParkingClientApi.client)
+            let parkingMeter = ParkingMeterStore(geoClient: GeoClientApi.client)
+            let payment = PaymentStore(paymentClient: PaymentClientApi.client)
             let router = Router()
             let messages = MessageStore.shared
             return environmentObject(session)

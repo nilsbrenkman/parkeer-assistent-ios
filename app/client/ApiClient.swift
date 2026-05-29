@@ -47,6 +47,11 @@ class ApiClient {
     }
 
     func throwError(_ error: ClientError) {
+        if case .Unauthorized = error {
+            cookies.token = nil
+            cookies.productId = nil
+            persistCookies()
+        }
         errorHandler?.handleError(error)
     }
 
@@ -242,7 +247,7 @@ class ApiClient {
                 + String(os.patchVersion)
             headers["X-ParkeerAssistent-Version"] = version
             headers["X-ParkeerAssistent-Build"] = build
-//            headers["X-ParkeerAssistent-Mock"] = "true"
+            // headers["X-ParkeerAssistent-Mock"] = "true"
         }
     }
 

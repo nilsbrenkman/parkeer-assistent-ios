@@ -65,7 +65,7 @@ struct StatusResponse: Codable {
     var status: String
 }
 
-struct Parking: Codable, Hashable, Comparable {
+struct Parking: Codable, Hashable, Comparable, Identifiable {
     var id: Int
     var license: String
     var startTime: String
@@ -95,7 +95,7 @@ struct AddParkingRequest: Codable {
     var parkingMeterId: Int
 }
 
-struct Visitor: Codable, Hashable, Comparable {
+struct Visitor: Codable, Hashable, Comparable, Identifiable {
     var id: Int
     var license: String
     var formattedLicense: String

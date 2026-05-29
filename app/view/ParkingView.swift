@@ -15,7 +15,8 @@ struct ParkingView: View {
     
     var body: some View {
 
-        Section(header: SectionHeader(Lang.Parking.header.localized())) {
+        Section(header: SectionHeader(Lang.Parking.header.localized())
+                            .padding(.top, Constants.padding.normal)) {
             if let parking = $parkings.parking.wrappedValue {
                 if parking.active.isEmpty && parking.scheduled.isEmpty {
                     Text(Lang.Parking.noSessions.localized())

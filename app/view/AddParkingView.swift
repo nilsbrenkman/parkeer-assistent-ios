@@ -20,7 +20,6 @@ struct AddParkingView: View {
         size: 12
     )
     
-    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     let calendarDelegate = CalenderViewDelegate()
     
     @State private var minutes = 0
@@ -132,11 +131,15 @@ struct AddParkingView: View {
         .onAppear(perform: {
             update()
         })
-        .onReceive(timer, perform: { _ in
-            if !showDatePicker {
-                update()
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 10 * 1_000_000_000)
+                if Task.isCancelled { return }
+                if !showDatePicker {
+                    update()
+                }
             }
-        })
+        }
         .pageTitle(Lang.Parking.start.localized(), dismiss: router.popScreen)
         .fullScreenCover(isPresented: $showMap) {
             ParkingMeterView { meter in

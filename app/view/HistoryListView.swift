@@ -14,12 +14,11 @@ struct HistoryListView: View {
 
     @EnvironmentObject var user: UserStore
     @EnvironmentObject var router: Router
-
-    @State var history: [History]? = nil
+    @EnvironmentObject var parkings: ParkingStore
 
     var body: some View {
         List {
-            if let history = history {
+            if let history = parkings.history {
                 if history.isEmpty {
                     Section {
                         Text(Lang.Parking.noHistory.localized())
@@ -57,16 +56,8 @@ struct HistoryListView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .onAppear {
-            Task {
-                do {
-                    let parkingClient = try ClientManager.instance.get(ParkingClient.self)
-                    let response = try await parkingClient.history()
-                    self.history = response.history
-                } catch {
-                    Log.error("history load failed: \(error.localizedDescription)")
-                }
-            }
+        .task {
+            await parkings.getHistory()
         }
         .pageTitle(Lang.Parking.history.localized(), dismiss: router.popScreen)
     }

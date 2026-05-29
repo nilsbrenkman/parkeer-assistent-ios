@@ -12,12 +12,8 @@ class PaymentStore: ObservableObject {
 
     private let paymentClient: PaymentClient
 
-    init() {
-        do {
-            paymentClient = try ClientManager.instance.get(PaymentClient.self)
-        } catch {
-            fatalError("Failed to initialize PaymentStore: \(error)")
-        }
+    init(paymentClient: PaymentClient) {
+        self.paymentClient = paymentClient
     }
 
     func payment(amount: Int, brand: String, onSuccess: ((String) -> Void)) async {

@@ -34,6 +34,8 @@
 "account.confirmDelete" = "Account verwijderen?";
 "account.errorUnavailable" = "FaceID is niet beschikbaar";
 "account.errorFailed" = "Authenticatie mislukt";
+"account.saveFailed" = "Account kan niet worden opgeslagen";
+"account.deleteFailed" = "Account kan niet worden verwijderd";
 
 "menu.button" = "Menu";
 

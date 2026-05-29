@@ -34,6 +34,8 @@
 "account.confirmDelete" = "Delete account?";
 "account.errorUnavailable" = "FaceID is not available";
 "account.errorFailed" = "Authentication failed";
+"account.saveFailed" = "Could not save account";
+"account.deleteFailed" = "Could not delete account";
 
 "menu.button" = "Menu";
 

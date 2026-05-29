@@ -12,12 +12,8 @@ class VisitorStore: ObservableObject {
 
     private let visitorClient: VisitorClient
 
-    init() {
-        do {
-            visitorClient = try ClientManager.instance.get(VisitorClient.self)
-        } catch {
-            fatalError("Failed to initialize VisitorStore: \(error)")
-        }
+    init(visitorClient: VisitorClient) {
+        self.visitorClient = visitorClient
     }
 
     func getVisitors() async {
