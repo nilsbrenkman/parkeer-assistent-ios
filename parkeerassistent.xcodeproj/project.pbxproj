@@ -24,6 +24,7 @@
 		295E91C527BEF55000A1929E /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E91C427BEF55000A1929E /* Preview.swift */; };
 		29600FBE2EC2AF5200BD4725 /* ParkingMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29600FBD2EC2AF5200BD4725 /* ParkingMeterView.swift */; };
 		29600FC72EC32A1400BD4725 /* GeoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29600FC62EC32A1400BD4725 /* GeoClient.swift */; };
+		29AB10C12FC9100200000002 /* UITestClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB10C02FC9100100000001 /* UITestClients.swift */; };
 		29688E6826B08361008BC85A /* car-horn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 29688E6726B08361008BC85A /* car-horn.wav */; };
 		29688E6A26B0B650008BC85A /* ParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29688E6926B0B650008BC85A /* ParkingView.swift */; };
 		29688E7226B1C729008BC85A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29688E7126B1C729008BC85A /* Launch Screen.storyboard */; };
@@ -137,6 +138,7 @@
 		29600FBD2EC2AF5200BD4725 /* ParkingMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingMeterView.swift; sourceTree = "<group>"; };
 		29600FC22EC2B01000BD4725 /* libswiftMapKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftMapKit.tbd; path = usr/lib/swift/libswiftMapKit.tbd; sourceTree = SDKROOT; };
 		29600FC62EC32A1400BD4725 /* GeoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoClient.swift; sourceTree = "<group>"; };
+		29AB10C02FC9100100000001 /* UITestClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestClients.swift; sourceTree = "<group>"; };
 		29688E6726B08361008BC85A /* car-horn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "car-horn.wav"; sourceTree = "<group>"; };
 		29688E6926B0B650008BC85A /* ParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingView.swift; sourceTree = "<group>"; };
 		29688E7126B1C729008BC85A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				299395EC271B4B0300B1AB57 /* LoginClient.swift */,
 				299395EB271B4B0300B1AB57 /* ParkingClient.swift */,
 				299395EA271B4B0300B1AB57 /* PaymentClient.swift */,
+				29AB10C02FC9100100000001 /* UITestClients.swift */,
 				299395E8271B4B0300B1AB57 /* UserClient.swift */,
 				299395EE271B4B0300B1AB57 /* VisitorClient.swift */,
 			);
@@ -647,6 +650,7 @@
 				299395C3271B1DD500B1AB57 /* UserStore.swift in Sources */,
 				2951455F2B245E3200ACD607 /* AccountDetailView.swift in Sources */,
 				29600FC72EC32A1400BD4725 /* GeoClient.swift in Sources */,
+				29AB10C12FC9100200000002 /* UITestClients.swift in Sources */,
 				29AF77492FC8D92A00BFF3FA /* ParkingMeterStore.swift in Sources */,
 				299395F7271B4B0400B1AB57 /* LoginClient.swift in Sources */,
 				29D4F74526B9E07000600D33 /* Button.swift in Sources */,

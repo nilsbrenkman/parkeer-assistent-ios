@@ -56,6 +56,7 @@ struct AddVisitorView: View {
                     Text(Lang.Visitor.name.localized())
                         .frame(width: 120, alignment: .leading)
                     TextField(Lang.Visitor.name.localized(), text: $name)
+                        .accessibility(identifier: "name")
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)

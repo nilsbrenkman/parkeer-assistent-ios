@@ -25,7 +25,7 @@ class UserUITests: XCTestCase {
     }
 
     func testBalance() throws {
-        let saldo = app.staticTexts["Saldo:"]
+        let saldo = app.staticTexts["Balance:"]
         XCTAssertTrue(saldo.waitForExistence(timeout: TestUtil.timeout))
 
         XCTAssertEqual(10.00, UserUITests.getBalance(app))
