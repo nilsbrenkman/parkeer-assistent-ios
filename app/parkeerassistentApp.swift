@@ -12,13 +12,13 @@ struct parkeerassistentApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    @StateObject var session = SessionStore(loginClient: LoginClientApi.client)
+    @StateObject var session = SessionStore(loginClient: Clients.login)
     @StateObject var accounts = AccountStore()
-    @StateObject var user = UserStore(userClient: UserClientApi.client)
-    @StateObject var visitors = VisitorStore(visitorClient: VisitorClientApi.client)
-    @StateObject var parkings = ParkingStore(parkingClient: ParkingClientApi.client)
-    @StateObject var parkingMeter = ParkingMeterStore(geoClient: GeoClientApi.client)
-    @StateObject var payment = PaymentStore(paymentClient: PaymentClientApi.client)
+    @StateObject var user = UserStore(userClient: Clients.user)
+    @StateObject var visitors = VisitorStore(visitorClient: Clients.visitor)
+    @StateObject var parkings = ParkingStore(parkingClient: Clients.parking)
+    @StateObject var parkingMeter = ParkingMeterStore(geoClient: Clients.geo)
+    @StateObject var payment = PaymentStore(paymentClient: Clients.payment)
     @StateObject var router = Router()
     @StateObject var messages = MessageStore.shared
 

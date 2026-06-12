@@ -28,6 +28,10 @@ class Notifications {
     }
 
     func parking(_ parking: ParkingResponse) {
+        if Util.isUITest() {
+            // prevent the notification permission alert from interrupting UI tests
+            return
+        }
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         for parking in parking.active {
             do { try scheduleReminders(parking) } catch { Log.error("scheduleReminders failed for parking \(parking.id): \(error.localizedDescription)") }

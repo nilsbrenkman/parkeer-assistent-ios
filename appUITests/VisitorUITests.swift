@@ -31,7 +31,7 @@ class VisitorUITests: XCTestCase {
     func testAddVisitor() throws {
         VisitorUITests.initialVisitorList(app)
 
-        let addVisitor = app.buttons["Nieuwe bezoeker"]
+        let addVisitor = app.buttons.element(matching: Label.addVisitor)
         XCTAssertTrue(addVisitor.waitForExistence(timeout: TestUtil.timeout))
         addVisitor.tap()
 
@@ -45,7 +45,7 @@ class VisitorUITests: XCTestCase {
         name.tap()
         name.typeText("New visitor")
 
-        app.buttons["Toevoegen"].tap()
+        app.buttons["Add"].tap()
 
         VisitorUITests.numberOfVisitors(app, count: 5)
     }
@@ -55,7 +55,10 @@ class VisitorUITests: XCTestCase {
 
         let erik = app.buttons["22-BBB-2, Erik"]
         erik.swipeLeft()
-        app.buttons["Verwijder"].tap()
+
+        let delete = app.buttons["delete-visitor"]
+        XCTAssertTrue(delete.waitForExistence(timeout: TestUtil.timeout))
+        delete.tap()
 
         VisitorUITests.numberOfVisitors(app, count: 3)
     }

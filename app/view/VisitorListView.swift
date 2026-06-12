@@ -41,6 +41,7 @@ struct VisitorListView: View {
                             } label: {
                                 Image(systemName: "trash")
                             }
+                            .accessibility(identifier: "delete-visitor")
                         }
                     }
                 }
