@@ -26,7 +26,6 @@ enum Clients {
 
 #if DEBUG
 
-@MainActor
 final class UITestBackend {
 
     static let shared = UITestBackend()
@@ -94,7 +93,6 @@ final class UITestBackend {
 
 }
 
-@MainActor
 final class UITestLoginClient: LoginClient {
 
     func loggedId() async throws -> Response {
@@ -116,7 +114,6 @@ final class UITestLoginClient: LoginClient {
 
 }
 
-@MainActor
 final class UITestUserClient: UserClient {
 
     func get() async throws -> UserResponse {
@@ -140,7 +137,6 @@ final class UITestUserClient: UserClient {
 
 }
 
-@MainActor
 final class UITestVisitorClient: VisitorClient {
 
     func get() async throws -> VisitorResponse {
@@ -159,7 +155,6 @@ final class UITestVisitorClient: VisitorClient {
 
 }
 
-@MainActor
 final class UITestParkingClient: ParkingClient {
 
     func get() async throws -> ParkingResponse {
@@ -183,7 +178,6 @@ final class UITestParkingClient: ParkingClient {
 
 }
 
-@MainActor
 final class UITestPaymentClient: PaymentClient {
 
     func payment(amount: Int, brand: String) async throws -> PaymentResponse {
@@ -200,7 +194,6 @@ final class UITestPaymentClient: PaymentClient {
 
 }
 
-@MainActor
 final class UITestGeoClient: GeoClient {
 
     func parkingMeters(location: CLLocationCoordinate2D) async throws -> [ParkingMeter] {
