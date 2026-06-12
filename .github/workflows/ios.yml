@@ -2,7 +2,7 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main", "claude/tender-carson-eo2olc" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
