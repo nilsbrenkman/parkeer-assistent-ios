@@ -20,7 +20,7 @@ struct ParkingListView: View {
 
         Section(header: SectionHeader(title)) {
             ForEach(parkingList, id: \.self) { parking in
-                NavigationLink(destination: ParkingDetailView(parking: parking)) {
+                NavigationLink(value: Screen.parkingDetail(parking)) {
                     ParkingRowView(parking: parking)
                 }
                 .accessibility(identifier: "parking")

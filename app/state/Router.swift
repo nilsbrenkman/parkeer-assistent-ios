@@ -17,6 +17,7 @@ enum Screen: Hashable {
     case settings
     case addVisitor
     case addParking(Visitor)
+    case parkingDetail(Parking)
 }
 
 @MainActor

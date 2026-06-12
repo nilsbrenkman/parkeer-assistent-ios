@@ -53,6 +53,8 @@ struct ContentView: View {
                         AddVisitorView()
                     case .addParking(let visitor):
                         AddParkingView(visitor: visitor)
+                    case .parkingDetail(let parking):
+                        ParkingDetailView(parking: parking)
                     }
                 }
         }
