@@ -15,7 +15,7 @@ struct RouterTest {
 
         router.syncRoot(isLoggedIn: true, isLoading: true, isBackground: false)
 
-        #expect(router.path == [])
+        #expect(router.path == [.user])
     }
 
     @Test func syncRootWhileBackgroundedClearsPath() {
@@ -24,7 +24,7 @@ struct RouterTest {
 
         router.syncRoot(isLoggedIn: true, isLoading: false, isBackground: true)
 
-        #expect(router.path == [])
+        #expect(router.path == [.user])
     }
 
     @Test func syncRootRoutesToUserWhenLoggedIn() {
