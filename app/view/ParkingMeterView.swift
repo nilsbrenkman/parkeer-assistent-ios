@@ -16,6 +16,7 @@ struct ParkingMeterView: View {
     
     @State private var locationAuthorizationListener: LocationAuthorizationListener? = nil
     @State private var isAppearing: Bool = true
+    @State private var fetchTask: Task<Void, Never>? = nil
 
     private let locationManager = CLLocationManager()
 
@@ -50,8 +51,11 @@ struct ParkingMeterView: View {
                     return
                 }
             }
-            parkingMeter.lastLocation = center
-            Task {
+            fetchTask?.cancel()
+            fetchTask = Task {
+                try? await Task.sleep(for: .milliseconds(300))
+                guard !Task.isCancelled else { return }
+                parkingMeter.lastLocation = center
                 await parkingMeter.fetchNearby(center)
             }
         }
