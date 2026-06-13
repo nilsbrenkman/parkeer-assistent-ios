@@ -7,21 +7,11 @@
 
 import XCTest
 
-class ParkingUITests: XCTestCase {
-
-    var app: XCUIApplication!
+class ParkingUITests: UITestCase {
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
-        app = XCUIApplication()
-        app.launchEnvironment = ["RUNMODE": "uitest"]
-        app.launch()
-
+        try super.setUpWithError()
         LoginUITests.login(app, usernameInput: "test", passwordInput: "1234")
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testNoParking() throws {

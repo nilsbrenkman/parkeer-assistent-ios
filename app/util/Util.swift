@@ -99,17 +99,39 @@ class Util {
     static func isUITest() -> Bool {
         #if DEBUG
             if ProcessInfo.processInfo.environment["RUNMODE"] == "uitest" {
-                Log.info("Running UI Tests")
                 return true
             }
         #endif
         return false
     }
 
+    #if DEBUG
+    /// A frozen reference time used during UI tests. Freezing "now" keeps
+    /// time-dependent flows (parking regime windows, start/end scheduling)
+    /// deterministic regardless of the wall-clock time the suite runs at.
+    /// Computed once; resolves to nil outside UI tests.
+    static let uiTestNow: Date? = {
+        guard isUITest() else { return nil }
+        var components = DateComponents()
+        components.year = 2025
+        components.month = 6
+        components.day = 16
+        components.hour = 10
+        components.minute = 0
+        components.second = 0
+        return Calendar.current.date(from: components)
+    }()
+    #endif
+
 }
 
 extension Date {
     static func now() -> Date {
-        Date()
+        #if DEBUG
+            if let frozen = Util.uiTestNow {
+                return frozen
+            }
+        #endif
+        return Date()
     }
 }

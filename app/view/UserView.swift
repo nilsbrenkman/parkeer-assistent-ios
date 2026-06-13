@@ -30,7 +30,7 @@ struct UserView: View {
                     await parkings.getParking()
                 }
                 user.isLoaded = true
-            } else if Stats.user.requestReview() {
+            } else if !Util.isUITest() && Stats.user.requestReview() {
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                     Stats.user.requested = Date.now()
                     SKStoreReviewController.requestReview(in: windowScene)

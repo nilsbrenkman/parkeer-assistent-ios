@@ -79,7 +79,10 @@ final class UITestBackend {
                               endTime: Util.dateTimeFormatter.string(from: end),
                               cost: (hourRate * Double(timeMinutes)) / 60)
         nextParkingId += 1
-        if start.timeIntervalSinceNow < 60 {
+        // Compare against the (frozen, in UI tests) app clock so that a parking
+        // whose start was nudged into the future is reliably classified as
+        // scheduled rather than active.
+        if start.timeIntervalSince(Date.now()) < 60 {
             active.append(parking)
         } else {
             scheduled.append(parking)
