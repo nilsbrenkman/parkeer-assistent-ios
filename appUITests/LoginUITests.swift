@@ -7,20 +7,7 @@
 
 import XCTest
 
-class LoginUITests: XCTestCase {
-
-    var app: XCUIApplication!
-
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-        app = XCUIApplication()
-        app.launchEnvironment = ["RUNMODE": "uitest"]
-        app.launch()
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+class LoginUITests: UITestCase {
 
     func testLoginScreen() throws {
         XCTAssertTrue(app.staticTexts.element(matching: Label.username).exists)
@@ -68,6 +55,7 @@ class LoginUITests: XCTestCase {
 
     static func login(_ app: XCUIApplication, usernameInput: String, passwordInput: String) {
         let username = app.textFields["username"]
+        XCTAssertTrue(username.waitForExistence(timeout: TestUtil.timeout))
         username.tap()
         username.typeText(usernameInput)
 
@@ -78,13 +66,10 @@ class LoginUITests: XCTestCase {
         let login = app.buttons.element(matching: Label.login)
         login.tap()
 
-        let menu = app.images["menu"]
-        if menu.waitForExistence(timeout: TestUtil.timeout) {
-            let dismiss = app.scrollViews.otherElements.buttons.element(matching: Label.dismiss)
-            if dismiss.waitForExistence(timeout: TestUtil.timeout) {
-                dismiss.tap()
-            }
-        }
+        // Clear the iOS "Save Password" prompt if it appears. A prompt that
+        // appears later is handled by the interruption monitor registered in
+        // UITestCase on the next interaction with the app.
+        TestUtil.dismissSavePasswordPrompt()
     }
 
 }
