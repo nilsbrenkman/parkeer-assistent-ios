@@ -9,9 +9,11 @@ import XCTest
 
 /// Shared base class for the UI test suites.
 ///
-/// Launches the app in UI-test mode and registers an interruption monitor that
-/// dismisses system dialogs (most notably the "Save Password" prompt) which can
-/// otherwise appear over the app at unpredictable moments and intercept taps.
+/// Registers an interruption monitor that dismisses stray system dialogs as a
+/// safety net, and exposes `launch(loggedIn:)` so each test can start the app
+/// in the state it needs. Suites that only need a session start logged in,
+/// which bypasses the login form entirely so the iOS "Save Password" prompt —
+/// which otherwise appears over the app and intercepts taps — never fires.
 class UITestCase: XCTestCase {
 
     var app: XCUIApplication!
@@ -29,10 +31,22 @@ class UITestCase: XCTestCase {
             }
             return false
         }
+    }
 
+    /// Launches the app in UI-test mode.
+    /// - Parameter loggedIn: when true the app starts past the login screen,
+    ///   so no credentials are submitted and the "Save Password" prompt never
+    ///   appears.
+    @discardableResult
+    func launch(loggedIn: Bool = false) -> XCUIApplication {
         app = XCUIApplication()
-        app.launchEnvironment = ["RUNMODE": "uitest"]
+        var environment = ["RUNMODE": "uitest"]
+        if loggedIn {
+            environment["LOGGED_IN"] = "true"
+        }
+        app.launchEnvironment = environment
         app.launch()
+        return app
     }
 
 }

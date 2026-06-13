@@ -11,7 +11,7 @@ class ParkingUITests: UITestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        LoginUITests.login(app, usernameInput: "test", passwordInput: "1234")
+        launch(loggedIn: true)
     }
 
     func testNoParking() throws {

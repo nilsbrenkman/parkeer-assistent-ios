@@ -49,7 +49,13 @@ final class UITestBackend {
     private var nextParkingId = 1
 
     private init() {
-        //
+        // Allow a suite to start past the login screen by launching with
+        // `LOGGED_IN=true`. Bypassing the form means no password is ever
+        // submitted, so the iOS "Save Password" prompt — which otherwise
+        // intercepts taps mid-suite — never appears.
+        if ProcessInfo.processInfo.environment["LOGGED_IN"] == "true" {
+            loggedIn = true
+        }
     }
 
     var regime: Regime {
