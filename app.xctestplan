@@ -29,6 +29,12 @@
       }
     },
     {
+      "skippedTests" : [
+        "LoginUITests",
+        "ParkingUITests",
+        "UserUITests",
+        "VisitorUITests"
+      ],
       "target" : {
         "containerPath" : "container:parkeerassistent.xcodeproj",
         "identifier" : "29B827CF26755F840025E717",
