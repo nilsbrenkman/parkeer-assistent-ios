@@ -2,7 +2,7 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "claude/failing-ui-tests-review-9su28v" ]
   pull_request:
     branches: [ "main" ]
 
