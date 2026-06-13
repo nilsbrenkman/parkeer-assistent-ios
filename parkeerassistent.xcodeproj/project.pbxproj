@@ -24,7 +24,6 @@
 		295E91C527BEF55000A1929E /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E91C427BEF55000A1929E /* Preview.swift */; };
 		29600FBE2EC2AF5200BD4725 /* ParkingMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29600FBD2EC2AF5200BD4725 /* ParkingMeterView.swift */; };
 		29600FC72EC32A1400BD4725 /* GeoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29600FC62EC32A1400BD4725 /* GeoClient.swift */; };
-		29AB10C12FC9100200000002 /* UITestClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB10C02FC9100100000001 /* UITestClients.swift */; };
 		29688E6826B08361008BC85A /* car-horn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 29688E6726B08361008BC85A /* car-horn.wav */; };
 		29688E6A26B0B650008BC85A /* ParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29688E6926B0B650008BC85A /* ParkingView.swift */; };
 		29688E7226B1C729008BC85A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29688E7126B1C729008BC85A /* Launch Screen.storyboard */; };
@@ -50,6 +49,7 @@
 		299395FB271B4B0400B1AB57 /* VisitorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299395EE271B4B0300B1AB57 /* VisitorClient.swift */; };
 		299395FF271B4C9700B1AB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 299395FE271B4C9700B1AB57 /* Assets.xcassets */; };
 		2994A45326CF251200332807 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2994A45226CF251200332807 /* PaymentView.swift */; };
+		29AB10C12FC9100200000002 /* UITestClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB10C02FC9100100000001 /* UITestClients.swift */; };
 		29AD3BF226CF42B10082E913 /* InsetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD3BF126CF42B10082E913 /* InsetPicker.swift */; };
 		29AD3BFE26D572470082E913 /* Language.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29AD3C0026D572470082E913 /* Language.strings */; };
 		29AD3C0526D57A9C0082E913 /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD3C0426D57A9C0082E913 /* Lang.swift */; };
@@ -138,7 +138,6 @@
 		29600FBD2EC2AF5200BD4725 /* ParkingMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingMeterView.swift; sourceTree = "<group>"; };
 		29600FC22EC2B01000BD4725 /* libswiftMapKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftMapKit.tbd; path = usr/lib/swift/libswiftMapKit.tbd; sourceTree = SDKROOT; };
 		29600FC62EC32A1400BD4725 /* GeoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoClient.swift; sourceTree = "<group>"; };
-		29AB10C02FC9100100000001 /* UITestClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestClients.swift; sourceTree = "<group>"; };
 		29688E6726B08361008BC85A /* car-horn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "car-horn.wav"; sourceTree = "<group>"; };
 		29688E6926B0B650008BC85A /* ParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingView.swift; sourceTree = "<group>"; };
 		29688E7126B1C729008BC85A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -163,6 +162,7 @@
 		299395EE271B4B0300B1AB57 /* VisitorClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorClient.swift; sourceTree = "<group>"; };
 		299395FE271B4C9700B1AB57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2994A45226CF251200332807 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		29AB10C02FC9100100000001 /* UITestClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestClients.swift; sourceTree = "<group>"; };
 		29AD3BF126CF42B10082E913 /* InsetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetPicker.swift; sourceTree = "<group>"; };
 		29AD3BFF26D572470082E913 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Language.strings; sourceTree = "<group>"; };
 		29AD3C0426D57A9C0082E913 /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
@@ -403,18 +403,18 @@
 		29B827C826755F840025E717 /* appTests */ = {
 			isa = PBXGroup;
 			children = (
-				291988C5268B78A400B289F0 /* UtilTest.swift */,
 				29419F9926FFBB0D0058DA25 /* LangTest.swift */,
 				298F7D8D2688BDAB00D75A5C /* LicenseTest.swift */,
-				29B827CB26755F840025E717 /* Info.plist */,
 				29AF774E2FC91CD200BFF3FA /* MockClients.swift */,
+				29AF775C2FC9234A00BFF3FA /* ParkingMeterStoreTest.swift */,
 				29AF77502FC91CDF00BFF3FA /* ParkingStoreTest.swift */,
-				29AF77522FC91CEB00BFF3FA /* VisitorStoreTest.swift */,
 				29AF77542FC91CF400BFF3FA /* PaymentStoreTest.swift */,
+				29AF775A2FC920D800BFF3FA /* RouterTest.swift */,
 				29AF77562FC91CFD00BFF3FA /* SessionStoreTest.swift */,
 				29AF77582FC91D0400BFF3FA /* UserStoreTest.swift */,
-				29AF775A2FC920D800BFF3FA /* RouterTest.swift */,
-				29AF775C2FC9234A00BFF3FA /* ParkingMeterStoreTest.swift */,
+				291988C5268B78A400B289F0 /* UtilTest.swift */,
+				29AF77522FC91CEB00BFF3FA /* VisitorStoreTest.swift */,
+				29B827CB26755F840025E717 /* Info.plist */,
 			);
 			path = appTests;
 			sourceTree = "<group>";
@@ -423,11 +423,11 @@
 			isa = PBXGroup;
 			children = (
 				29D4F74626B9F25100600D33 /* LoginUITests.swift */,
-				29D4F74826BA08D200600D33 /* UserUITests.swift */,
-				29B827D626755F840025E717 /* Info.plist */,
-				29D4F74A26BA15ED00600D33 /* VisitorUITests.swift */,
 				293220FA26BEF57000E5B8B7 /* ParkingUITests.swift */,
 				293220FE26BEF6AC00E5B8B7 /* TestUtil.swift */,
+				29D4F74826BA08D200600D33 /* UserUITests.swift */,
+				29D4F74A26BA15ED00600D33 /* VisitorUITests.swift */,
+				29B827D626755F840025E717 /* Info.plist */,
 			);
 			path = appUITests;
 			sourceTree = "<group>";

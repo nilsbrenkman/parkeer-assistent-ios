@@ -57,7 +57,7 @@ class UserStore: ObservableObject {
         productId = response.productId
         zoneId = response.zoneId
         parkingMeterId = response.parkingMeterId
-        setRegimeForDate(Date.now)
+        setRegimeForDate(Date.now())
         timeBalance = Util.calculateTimeBalance(balance: response.balance,
                                                 hourRate: 0.01)
         await onComplete()

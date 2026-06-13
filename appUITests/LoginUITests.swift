@@ -51,10 +51,13 @@ class LoginUITests: UITestCase {
         // that a form-based login would trigger.
         launch(loggedIn: true)
 
+        // The Image carries the "menu" identifier but is wrapped in SwiftUI's
+        // Menu, whose button consumes hit-testing — the image reports
+        // isHittable == false. Tap via coordinate so the touch reaches the
+        // wrapping button.
         let menu = app.images["menu"]
         XCTAssertTrue(menu.waitForExistence(timeout: TestUtil.timeout))
-        wait(for: [XCTNSPredicateExpectation(predicate: NSPredicate(format: "isHittable == true"), object: menu)], timeout: TestUtil.timeout)
-        menu.tap()
+        menu.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
 
         let logout = app.buttons.element(matching: Label.logout)
         XCTAssertTrue(logout.waitForExistence(timeout: TestUtil.timeout))

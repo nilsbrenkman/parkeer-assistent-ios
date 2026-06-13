@@ -65,6 +65,68 @@ class ParkingUITests: UITestCase {
         XCTAssertTrue(scheduled.exists)
     }
 
+    func testStopParkingFromDetail() throws {
+        addActiveParking()
+
+        let parking = app.buttons.matching(identifier: "parking").firstMatch
+        XCTAssertTrue(parking.waitForExistence(timeout: TestUtil.timeout))
+        parking.tap()
+
+        let stop = app.buttons.element(matching: Label.parkingStop)
+        XCTAssertTrue(stop.waitForExistence(timeout: TestUtil.timeout))
+        stop.tap()
+
+        let header = app.staticTexts.element(matching: Label.parkingHeader)
+        XCTAssertTrue(header.waitForExistence(timeout: TestUtil.timeout))
+
+        ParkingUITests.numberOfParking(app, count: 0)
+        let empty = app.staticTexts.element(matching: Label.parkingEmpty)
+        XCTAssertTrue(empty.exists)
+    }
+
+    func testDeleteParkingFromList() throws {
+        addActiveParking()
+
+        let parking = app.buttons.matching(identifier: "parking").firstMatch
+        XCTAssertTrue(parking.waitForExistence(timeout: TestUtil.timeout))
+        parking.tap()
+
+        let backButton = app.navigationBars.buttons.firstMatch
+        XCTAssertTrue(backButton.waitForExistence(timeout: TestUtil.timeout))
+        backButton.tap()
+
+        let header = app.staticTexts.element(matching: Label.parkingHeader)
+        XCTAssertTrue(header.waitForExistence(timeout: TestUtil.timeout))
+
+        let session = app.buttons.matching(identifier: "parking").firstMatch
+        XCTAssertTrue(session.waitForExistence(timeout: TestUtil.timeout))
+        session.swipeLeft()
+
+        let delete = app.buttons["delete-parking"]
+        XCTAssertTrue(delete.waitForExistence(timeout: TestUtil.timeout))
+        delete.tap()
+
+        ParkingUITests.numberOfParking(app, count: 0)
+        let empty = app.staticTexts.element(matching: Label.parkingEmpty)
+        XCTAssertTrue(empty.exists)
+    }
+
+    private func addActiveParking() {
+        ParkingUITests.initialParkingList(app)
+        VisitorUITests.initialVisitorList(app)
+
+        let erik = app.buttons["22-BBB-2, Erik"]
+        erik.tap()
+
+        let wheel = app.otherElements["wheel-selector"]
+        XCTAssertTrue(wheel.waitForExistence(timeout: TestUtil.timeout))
+        wheel.swipeLeft()
+
+        app.buttons.element(matching: Label.add).tap()
+
+        ParkingUITests.numberOfParking(app, count: 1)
+    }
+
     static func initialParkingList(_ app: XCUIApplication) {
         let header = app.staticTexts.element(matching: Label.parkingHeader)
         XCTAssertTrue(header.waitForExistence(timeout: TestUtil.timeout))

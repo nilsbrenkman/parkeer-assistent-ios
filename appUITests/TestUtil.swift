@@ -84,6 +84,7 @@ struct Label {
     static let parkingEmpty = Label.buildPredicate("No active or scheduled sessions")
     static let parkingActive = Label.buildCaseInsensitivePredicate("Active sessions")
     static let parkingScheduled = Label.buildCaseInsensitivePredicate("Scheduled sessions")
+    static let parkingStop = Label.buildPredicate("Stop session")
 
     static let visitorHeader = Label.buildCaseInsensitivePredicate("Visitors:")
     static let addVisitor = Label.buildPredicate("Add visitor")

@@ -32,6 +32,7 @@ struct ParkingListView: View {
                     } label: {
                         Image(systemName: "trash")
                     }
+                    .accessibility(identifier: "delete-parking")
                 }
             }
         }
