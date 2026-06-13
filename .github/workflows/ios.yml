@@ -2,9 +2,7 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main", "claude/failing-ui-tests-review-9su28v" ]
   pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -13,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set Default Scheme
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
