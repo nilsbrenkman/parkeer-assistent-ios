@@ -29,7 +29,7 @@ class SessionStore: ObservableObject, ErrorHandler {
             switch error {
             case .Unauthorized:
                 if self.isLoggedIn {
-                    MessageStore.shared.addMessage(Lang.Error.unauthorized.localized(), type: Type.WARN)
+                    Log.info("\(Lang.Error.unauthorized.localized())")
                 }
                 self.clearUser()
             case .NoHttpResponse:

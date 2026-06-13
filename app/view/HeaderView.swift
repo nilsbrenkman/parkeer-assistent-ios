@@ -110,6 +110,7 @@ struct HeaderView: View {
     private func logout() {
         Task {
             await session.logout()
+            user.reset()
         }
     }
     

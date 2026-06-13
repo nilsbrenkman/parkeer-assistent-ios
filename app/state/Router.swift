@@ -42,9 +42,7 @@ class Router: ObservableObject {
     }
 
     func syncRoot(isLoggedIn: Bool, isLoading: Bool, isBackground: Bool) {
-        if isLoading || isBackground {
-            path = []
-        } else if isLoggedIn {
+        if isLoggedIn {
             path = [.user]
         } else {
             path = [.login]
