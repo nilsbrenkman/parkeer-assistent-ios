@@ -10,6 +10,8 @@ import XCTest
 class LoginUITests: UITestCase {
 
     func testLoginScreen() throws {
+        launch()
+
         XCTAssertTrue(app.staticTexts.element(matching: Label.username).exists)
         XCTAssertTrue(app.staticTexts.element(matching: Label.password).exists)
 
@@ -22,13 +24,20 @@ class LoginUITests: UITestCase {
     }
 
     func testLoginSuccess() throws {
+        launch()
+
         LoginUITests.login(app, usernameInput: "test", passwordInput: "1234")
 
+        // The test finishes as soon as login succeeds: asserting the menu only
+        // checks for existence (not a tap), so the trailing "Save Password"
+        // prompt cannot interrupt it.
         let menu = app.images["menu"]
         XCTAssertTrue(menu.waitForExistence(timeout: TestUtil.timeout))
     }
 
     func testLoginFailed() throws {
+        launch()
+
         LoginUITests.login(app, usernameInput: "fail", passwordInput: "invalid")
 
         let message = app.staticTexts["message"]
@@ -37,7 +46,10 @@ class LoginUITests: UITestCase {
     }
 
     func testLogout() throws {
-        try testLoginSuccess()
+        // Start already logged in so logging out — which interacts with the
+        // app after login — is never interrupted by the "Save Password" prompt
+        // that a form-based login would trigger.
+        launch(loggedIn: true)
 
         let menu = app.images["menu"]
         XCTAssertTrue(menu.waitForExistence(timeout: TestUtil.timeout))
