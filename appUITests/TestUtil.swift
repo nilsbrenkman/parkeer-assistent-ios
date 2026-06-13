@@ -19,7 +19,7 @@ class UITestCase: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
 
-        addUIInterruptionMonitor(withDescription: "System dialog") { alert in
+        _ = addUIInterruptionMonitor(withDescription: "System dialog") { alert in
             for label in ["Not Now", "Don't Allow", "Cancel", "Allow", "OK"] {
                 let button = alert.buttons[label]
                 if button.exists {
