@@ -11,14 +11,15 @@ import MapKit
 struct ParkingMeterView: View {
     
     @EnvironmentObject var parkingMeter: ParkingMeterStore
+    @EnvironmentObject var user: UserStore
     
     var onSelect: (ParkingMeter) -> Void
     
     @State private var locationAuthorizationListener: LocationAuthorizationListener? = nil
     @State private var isAppearing: Bool = true
     @State private var fetchTask: Task<Void, Never>? = nil
-
-    private let locationManager = CLLocationManager()
+    @State private var locationManager = CLLocationManager()
+    @State private var heading: CLLocationDirection = 0
 
     var body: some View {
         Map(position: $parkingMeter.position, bounds: .amsterdam, interactionModes: [.pan, .zoom, .rotate]) {
@@ -43,6 +44,7 @@ struct ParkingMeterView: View {
             }
         }
         .onMapCameraChange { context in
+            heading = context.camera.heading
             if isAppearing { return }
             let center = context.region.center
             if let last = parkingMeter.lastLocation {
@@ -60,22 +62,43 @@ struct ParkingMeterView: View {
             }
         }
         .mapControls {
-            if (locationManager.authorizationStatus == .authorizedWhenInUse) {
-                MapUserLocationButton()
-            }
             MapCompass()
         }
+        .overlay(alignment: .topTrailing) {
+            if locationManager.authorizationStatus != .denied {
+                Button {
+                    switch locationManager.authorizationStatus {
+                    case .notDetermined:
+                        locationManager.requestWhenInUseAuthorization()
+                    case .authorizedWhenInUse, .authorizedAlways:
+                        locationManager.requestLocation()
+                    default:
+                        break
+                    }
+                } label: {
+                    Image(systemName: "location.fill")
+                        .font(.title3)
+                        .padding(11)
+                        .background(.regularMaterial, in: Circle())
+                        .shadow(radius: 1)
+                    
+                }
+                .padding()
+                .padding(.top, heading != 0 ? 60 : 0)
+                .animation(.default, value: heading != 0)
+            }
+        }
         .onAppear() {
+            if let meterId = user.parkingMeterId {
+                Task {
+                    if let meter = await parkingMeter.fetchMeter(id: meterId) {
+                        updateLocation(coordinate: meter.coordinate())
+                    }
+                }
+            }
             if (locationAuthorizationListener == nil) {
                 self.locationAuthorizationListener = LocationAuthorizationListener(self.updateLocation)
                 self.locationManager.delegate = self.locationAuthorizationListener
-            }
-            if (parkingMeter.lastLocation == nil) {
-                if (self.locationManager.authorizationStatus == .authorizedWhenInUse) {
-                    self.locationManager.requestLocation()
-                } else {
-                    self.locationManager.requestWhenInUseAuthorization()
-                }
             }
             isAppearing = false
         }
@@ -100,10 +123,8 @@ struct ParkingMeterView: View {
         
         func locationManager(_ manager: CLLocationManager,
                              didChangeAuthorization status: CLAuthorizationStatus) {
-            if status == .authorizedWhenInUse {
-                if let location = manager.location {
-                    onLocationChanged(location.coordinate)
-                }
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                manager.requestLocation()
             }
         }
         

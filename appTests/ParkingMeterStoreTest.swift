@@ -34,4 +34,26 @@ struct ParkingMeterStoreTest {
 
         #expect(store.parkingMeters.isEmpty)
     }
+
+    @Test func fetchMeterReturnsClientResult() async {
+        let client = MockGeoClient()
+        let meter = ParkingMeter(id: 7, name: "7", longitude: 4.89, latitude: 52.37, distance: 0)
+        client.parkingMeterResult = .success(meter)
+        let store = ParkingMeterStore(geoClient: client)
+
+        let result = await store.fetchMeter(id: 7)
+
+        #expect(client.parkingMeterCalls == [7])
+        #expect(result?.id == 7)
+    }
+
+    @Test func fetchMeterReturnsNilOnError() async {
+        let client = MockGeoClient()
+        client.parkingMeterResult = .failure(ClientError.NoHttpResponse)
+        let store = ParkingMeterStore(geoClient: client)
+
+        let result = await store.fetchMeter(id: 7)
+
+        #expect(result == nil)
+    }
 }

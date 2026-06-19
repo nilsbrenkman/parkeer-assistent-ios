@@ -10,6 +10,7 @@ import CoreLocation
 
 protocol GeoClient {
     func parkingMeters(location: CLLocationCoordinate2D) async throws -> [ParkingMeter]
+    func parkingMeter(id: Int) async throws -> ParkingMeter
 }
 
 class GeoClientApi: GeoClient {
@@ -32,6 +33,15 @@ class GeoClientApi: GeoClient {
             .call(
                 [ParkingMeter].self,
                 path: path,
+                method: Method.GET
+            )
+    }
+
+    func parkingMeter(id: Int) async throws -> ParkingMeter {
+        return try await ApiClient.client
+            .call(
+                ParkingMeter.self,
+                path: "geo/parking-meters/\(id)",
                 method: Method.GET
             )
     }
