@@ -38,28 +38,32 @@ class Util {
         return formatCost(0)
     }
 
-    static func formatCost(_ cost: Double) -> String {
-        String(format: "%.2f", cost)
-    }
-
     static func calculateTimeBalance(balance: String?, hourRate: Double?) -> Int {
         if let balance = Double(balance ?? "0"), let hourRate = hourRate {
             return Int(balance / hourRate * 60)
         }
         return 0
     }
-
-    static func getParkingTime(_ time: String) -> String {
-        guard let date = Util.dateTimeFormatter.date(from: time) else {
-            Log.warning("getParkingTime: could not parse '\(time)'")
-            return ""
-        }
-        return parkingFormatter.string(from: date)
+    
+    static func formatCost(_ cost: Double) -> String {
+        String(format: "%.2f", cost)
+    }
+    
+    static func formatDate(_ datetime: String) -> String {
+        return convertDate(datetime, formatter: dayMonthFormatter)
     }
 
-    static func convertDate(_ time: String, formatter: DateFormatter) throws -> String {
-        guard let date = Util.dateTimeFormatter.date(from: time) else {
-            throw GenericError.InvalidDate
+    static func formatTime(_ datetime: String) -> String {
+        return convertDate(datetime, formatter: timeFormatter)
+    }
+
+    static func formatDateTime(_ datetime: String) -> String {
+        return convertDate(datetime, formatter: parkingFormatter)
+    }
+
+    static func convertDate(_ datetime: String, formatter: DateFormatter) -> String {
+        guard let date = Util.dateTimeFormatter.date(from: datetime) else {
+            return ""
         }
         return formatter.string(from: date)
     }

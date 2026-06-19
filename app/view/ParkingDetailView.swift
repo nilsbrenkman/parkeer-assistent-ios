@@ -27,8 +27,8 @@ struct ParkingDetailView: View {
 
                     Property(label: Lang.Visitor.name.localized(), text: visitors.getName(from: parking.license))
                     Property(label: Lang.Parking.cost.localized(), text: "€ \(Util.formatCost(parking.cost))")
-                    Property(label: Lang.Parking.startTime.localized(), text: Util.getParkingTime(parking.startTime))
-                    Property(label: Lang.Parking.endTime.localized(), text: Util.getParkingTime(parking.endTime))
+                    Property(label: Lang.Parking.startTime.localized(), text: Util.formatDateTime(parking.startTime))
+                    Property(label: Lang.Parking.endTime.localized(), text: Util.formatDateTime(parking.endTime))
                 }
                 .padding(.vertical)
             }
