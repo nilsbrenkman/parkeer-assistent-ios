@@ -38,11 +38,16 @@ class LoginUITests: UITestCase {
     func testLoginFailed() throws {
         launch()
 
-        LoginUITests.login(app, usernameInput: "fail", passwordInput: "invalid")
+        // Failed login never triggers the iOS "Save Password" prompt, so skip
+        // its dismissal — its 3-second wait would otherwise outlast the toast,
+        // which auto-dismisses after a few seconds.
+        LoginUITests.login(app, usernameInput: "fail", passwordInput: "invalid", dismissPrompt: false)
 
         let message = app.staticTexts["message"]
         XCTAssertTrue(message.waitForExistence(timeout: TestUtil.timeout))
-        XCTAssertTrue(message.label == "Login failed")
+        // Snapshot the label before the toast can auto-dismiss out from under us.
+        let label = message.label
+        XCTAssertEqual(label, "Login failed")
     }
 
     func testLogout() throws {
@@ -68,7 +73,7 @@ class LoginUITests: UITestCase {
         XCTAssertFalse(logout.exists)
     }
 
-    static func login(_ app: XCUIApplication, usernameInput: String, passwordInput: String) {
+    static func login(_ app: XCUIApplication, usernameInput: String, passwordInput: String, dismissPrompt: Bool = true) {
         let username = app.textFields["username"]
         XCTAssertTrue(username.waitForExistence(timeout: TestUtil.timeout))
         username.tap()
@@ -84,7 +89,9 @@ class LoginUITests: UITestCase {
         // Clear the iOS "Save Password" prompt if it appears. A prompt that
         // appears later is handled by the interruption monitor registered in
         // UITestCase on the next interaction with the app.
-        TestUtil.dismissSavePasswordPrompt()
+        if dismissPrompt {
+            TestUtil.dismissSavePasswordPrompt()
+        }
     }
 
 }

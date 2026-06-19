@@ -74,7 +74,7 @@ struct UserView: View {
         }
 
         while !Task.isCancelled {
-            var delay = 60.0
+            var delay = 60.0 * 5
 
             Log.debug("Running refresh task")
 
@@ -90,10 +90,15 @@ struct UserView: View {
             for scheduled in parking.scheduled {
                 delay = min(delay, checkUpdate(scheduled.startTime))
             }
-
-            if delay > 0 {
-                try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            
+            if delay < 10.0 {
+                delay = 10.0
+            } else {
+                delay += 1.0
             }
+
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+
             if Task.isCancelled { return }
             await parkings.getParking()
         }
