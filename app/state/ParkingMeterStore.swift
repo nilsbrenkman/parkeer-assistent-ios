@@ -33,4 +33,13 @@ class ParkingMeterStore: ObservableObject {
         }
     }
 
+    func fetchMeter(id: Int) async -> ParkingMeter? {
+        do {
+            return try await geoClient.parkingMeter(id: id)
+        } catch {
+            Log.error("fetchMeter failed: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
 }

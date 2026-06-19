@@ -213,6 +213,14 @@ final class UITestGeoClient: GeoClient {
                       distance: 0)]
     }
 
+    func parkingMeter(id: Int) async throws -> ParkingMeter {
+        ParkingMeter(id: id,
+                     name: String(id),
+                     longitude: CLLocationCoordinate2D.amsterdam.longitude,
+                     latitude: CLLocationCoordinate2D.amsterdam.latitude,
+                     distance: 0)
+    }
+
 }
 
 #endif

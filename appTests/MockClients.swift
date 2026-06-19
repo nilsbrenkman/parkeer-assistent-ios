@@ -91,12 +91,21 @@ final class MockVisitorClient: VisitorClient, @unchecked Sendable {
 
 final class MockGeoClient: GeoClient, @unchecked Sendable {
     var parkingMetersResult: Result<[ParkingMeter], Error> = .success([])
+    var parkingMeterResult: Result<ParkingMeter, Error> = .success(
+        ParkingMeter(id: 0, name: "0", longitude: 4.89, latitude: 52.37, distance: 0)
+    )
 
     private(set) var parkingMetersCalls: [CLLocationCoordinate2D] = []
+    private(set) var parkingMeterCalls: [Int] = []
 
     func parkingMeters(location: CLLocationCoordinate2D) async throws -> [ParkingMeter] {
         parkingMetersCalls.append(location)
         return try parkingMetersResult.get()
+    }
+
+    func parkingMeter(id: Int) async throws -> ParkingMeter {
+        parkingMeterCalls.append(id)
+        return try parkingMeterResult.get()
     }
 }
 
