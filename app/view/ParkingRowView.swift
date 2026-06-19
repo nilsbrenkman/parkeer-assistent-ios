@@ -19,10 +19,15 @@ struct ParkingRowView: View {
         HStack {
             LicenseView(license: parking.license)
 
-            Text("\(visitors.getName(from: parking.license))")
-                .font( /*@START_MENU_TOKEN@*/.title3 /*@END_MENU_TOKEN@*/)
-                .bold()
-                .padding(.leading)
+            VStack(alignment: .leading) {
+                Text("\(visitors.getName(from: parking.license))")
+                    .font(.title3)
+                    .bold()
+                    .padding(.leading)
+                Text("\(Util.formatDate(parking.startTime)), \(Util.formatTime(parking.startTime)) - \(Util.formatTime(parking.endTime))")
+                    .font(.footnote)
+                    .padding(.leading)
+            }
 
         }
         .frame(minHeight: 42)

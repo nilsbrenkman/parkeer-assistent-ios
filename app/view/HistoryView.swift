@@ -25,8 +25,8 @@ struct HistoryView: View {
 
                     Property(label: Lang.Visitor.name.localized(), text: visitors.getName(from: history.license))
                     Property(label: Lang.Parking.cost.localized(), text: "€ \(Util.formatCost(history.cost))")
-                    Property(label: Lang.Parking.startTime.localized(), text: Util.getParkingTime(history.startTime))
-                    Property(label: Lang.Parking.endTime.localized(), text: Util.getParkingTime(history.endTime))
+                    Property(label: Lang.Parking.startTime.localized(), text: Util.formatDateTime(history.startTime))
+                    Property(label: Lang.Parking.endTime.localized(), text: Util.formatDateTime(history.endTime))
                 }
             }
         }
