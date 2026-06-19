@@ -66,19 +66,22 @@ struct AddParkingView: View {
                             Text("\(Lang.Parking.sign.localized()):")
                                 .font(Font.ui.dataBoxTitle)
                             ZStack {
-                                RoundedRectangle(cornerRadius: Constants.radius.small, style: .continuous)
-                                    .fill(Color.ui.header)
-                                    .frame(height: 48)
                                 if let id = user.parkingMeterId {
+                                    RoundedRectangle(cornerRadius: Constants.radius.small, style: .continuous)
+                                        .fill(Color.ui.header)
+                                        .frame(height: 48)
                                     Text("\(String(id))")
                                         .font(Font.ui.dataBoxContent)
                                         .bold()
                                         .foregroundColor(.white)
                                 } else {
-                                    Text("...")
+                                    RoundedRectangle(cornerRadius: Constants.radius.small, style: .continuous)
+                                        .fill(Color.ui.danger)
+                                        .frame(height: 48)
+                                    Text("?")
                                         .font(Font.ui.dataBoxContent)
                                         .bold()
-                                        .foregroundColor(Color.ui.danger)
+                                        .foregroundColor(Color.ui.enabled)
                                 }
                             }
                         }
@@ -201,10 +204,8 @@ struct AddParkingView: View {
     }
     
     private func updateRegime() {
-        Task {
-            await user.getRegime(startDate)
-            update()
-        }
+        user.getRegime(startDate)
+        update()
     }
     
     private func minimumStartTime() -> Date {

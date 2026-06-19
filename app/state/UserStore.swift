@@ -80,7 +80,7 @@ class UserStore: ObservableObject {
                                                 hourRate: hourRate)
     }
     
-    func getRegime(_ date: Date) async {
+    func getRegime(_ date: Date) {
         if regime != nil {
             setRegimeForDate(date)
             return
@@ -88,13 +88,16 @@ class UserStore: ObservableObject {
     }
     
     func setRegimeForDate(_ date: Date) {
-        guard let regime,
-              let regimeDay = Util.getRegimeDay(regime: regime, date: date) else {
+        guard let regime else {
+            regimeTimeStart = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date)
+            regimeTimeEnd = Calendar.current.date(bySettingHour: 23, minute: 59, second: 0, of: date)
+            return
+        }
+        guard let regimeDay = Util.getRegimeDay(regime: regime, date: date) else {
             regimeTimeStart = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date)
             regimeTimeEnd = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date)
             
             MessageStore.shared.addMessage(Lang.Parking.freeParking.localized(), type: Type.WARN)
-            
             return
         }
         regimeTimeStart = getRegimeTime(date: date, time: regimeDay.startTime)
@@ -121,6 +124,7 @@ class UserStore: ObservableObject {
             self.hourRate = response.hourRate
             self.zoneId = response.zoneId
             self.regime = response.regime
+            getRegime(self.regimeTimeStart ?? Date.now())
         }
     }
     

@@ -19,11 +19,11 @@ struct LoginRequest: Codable {
 
 struct UserResponse: Codable {
     var balance: String
-    var hourRate: Double
+    var hourRate: Double?
     var productId: Int
-    var zoneId: Int
-    var parkingMeterId: Int
-    var regime: Regime
+    var zoneId: Int?
+    var parkingMeterId: Int?
+    var regime: Regime?
 }
 
 struct BalanceResponse: Codable {
@@ -31,9 +31,9 @@ struct BalanceResponse: Codable {
 }
 
 struct RegimeResponse: Codable {
-    var hourRate: Double
-    var zoneId: Int
-    var regime: Regime
+    var hourRate: Double?
+    var zoneId: Int?
+    var regime: Regime?
 }
 
 struct IdealResponse: Codable {
