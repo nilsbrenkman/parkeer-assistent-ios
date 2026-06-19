@@ -130,7 +130,9 @@ struct ParkingMeterView: View {
         
         func locationManager(_ manager: CLLocationManager,
                              didUpdateLocations locations: [CLLocation]) {
-            onLocationChanged(manager.location!.coordinate)
+            if let location = manager.location {
+                onLocationChanged(location.coordinate)
+            }
         }
         
         func locationManager(_ manager: CLLocationManager,
