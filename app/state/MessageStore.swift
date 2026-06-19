@@ -27,7 +27,8 @@ class MessageStore: ObservableObject {
 
 }
 
-struct Message {
+struct Message: Identifiable {
+    let id = UUID()
     var message: String
     var type: Type
     var ok: (() -> Void)?

@@ -108,6 +108,9 @@ class Notifications {
         content.interruptionLevel = .timeSensitive
 
         let timeInterval = Date.now().distance(to: date)
+        if timeInterval < 10.0 {
+            return
+        }
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
 
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
